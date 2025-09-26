@@ -1,3 +1,3 @@
-# Codis Clase
+# Codis Clase Professor
 
 ## Carpeta A1. Codis Activitat 1 M0485
