@@ -26,6 +26,10 @@ public class TeoriaCondicionales {
             {
              System.out.println("Has sacado un excelente");
             }
+        else
+        {
+            System.out.println("Nota Incorrecta");
+        }
 
     }
 }
