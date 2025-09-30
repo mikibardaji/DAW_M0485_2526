@@ -21,8 +21,8 @@ public class AumentarSegundo {
             {
                 minutos = minutos+1;
                 segundos = 0;
-                if (minutos>=60)
-                    {
+                if (minutos>=60) //esta dentro para que solo se pregunte 
+                    { //si he cambiado el segundo
                      horas = horas+1;
                      minutos = 0;   
                      if (horas>=24)
