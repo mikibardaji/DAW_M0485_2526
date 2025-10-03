@@ -18,7 +18,7 @@ public class ClashRoyale {
                  System.out.print("Has escogido ");
                /*Mas LIMPIO solo sirve == */
                 switch (opcion) {
-                    case 'm':
+                    case 'm':                    
                     case 'M':
                         System.out.println("mago Electrico");
                         break;
