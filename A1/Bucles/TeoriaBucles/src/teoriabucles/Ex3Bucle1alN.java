@@ -26,6 +26,11 @@ por teclado.
             System.out.println(num_inicio);
             num_inicio++;
         }
+        
+        for(num_inicio=1;num_inicio<=numero;++num_inicio)
+        {
+            System.out.println(num_inicio);
+        }
     }
     
 }

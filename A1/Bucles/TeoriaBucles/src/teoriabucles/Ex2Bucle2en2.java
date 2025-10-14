@@ -19,6 +19,12 @@ public class Ex2Bucle2en2 {
             System.out.println(contador);
             contador += 2; //contador = contador + 2
         }
+        System.out.println("FOr");
+        for(contador=2;contador <= 200;contador += 2)
+        {
+            System.out.println(contador);
+        }
+        
     }
     
 }
