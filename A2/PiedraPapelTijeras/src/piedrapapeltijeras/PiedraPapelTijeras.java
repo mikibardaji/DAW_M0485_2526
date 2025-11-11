@@ -25,7 +25,7 @@ public class PiedraPapelTijeras {
 
 
     public static void main(String[] args) {
-
+        
         Scanner sc = new Scanner(System.in);
         int puntosJ1 = 0;
         int puntosJ2 = 0;
@@ -57,7 +57,7 @@ public class PiedraPapelTijeras {
         Scanner sc = new Scanner(System.in);
         int respuesta;
         do {
-            System.out.println("¿Qué sacas? (0 Piedra, 1 Papel, 2 Tijera)");
+            System.out.println("ï¿½Quï¿½ sacas? (0 Piedra, 1 Papel, 2 Tijera)");
             respuesta = sc.nextInt();
         } while (respuesta < 0 || respuesta > 2);
         return respuesta;
@@ -115,7 +115,7 @@ public class PiedraPapelTijeras {
         Scanner sc = new Scanner(System.in);
         int puntos;
         do{
-            System.out.println("¿A cuantos es la partida?");
+            System.out.println("ï¿½A cuantos es la partida?");
             puntos  = sc.nextInt();    
         }while(puntos<=0);
         
