@@ -48,6 +48,15 @@ public class PedirDatosUsuario {
     public static int pedirDatoEntreIntervalo(int min, int max)
     {
         Scanner sc = new Scanner(System.in);
+        int cambio;
+//        if (min>max)
+//        {
+//            cambio = min;
+//            min = max;
+//            max = cambio;
+//        }
+        
+        
         int valor;
         do
         {
