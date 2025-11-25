@@ -65,8 +65,8 @@ public class Botella {
     
     public void setLiquido(int nuevo_ml)
     {
-        if (nuevo_ml<= ml_capacidad 
-                && nuevo_ml> ml_liquido)
+        if (nuevo_ml<= ml_capacidad  
+                && nuevo_ml> ml_liquido) //no superi la capacitat botella, i que sigui mes del ml que ja tenia
         {
             ml_liquido = nuevo_ml;
         }
@@ -79,7 +79,7 @@ public class Botella {
     
     public void rellenar(int nuevo_ml)
     {
-        if ((ml_liquido+nuevo_ml)>ml_capacidad)
+        if ((ml_liquido+nuevo_ml)>ml_capacidad && nuevo_ml<0)
         {
             System.out.println("No puedo rellenarlo");
         }
@@ -108,9 +108,39 @@ public class Botella {
     }
     
     public int verter()
-    {
-        ml_liquido = ml_liquido - 5;
-        return 5;
+    {//contemplessim estat o valors que afectessin a aquest verter
+       //opcion1: if (tapon==false) //abierta    
+       //opcion2:  if (estaCerrada()==false)
+        if (!estaCerrada())
+        {
+            if (ml_liquido==0)
+            {
+                System.out.println("no hay liquido");
+                return 0;
+            }
+            else
+            {
+                if (ml_liquido>=5) //si no tenemos el minimo de liquido
+                {
+                    ml_liquido = ml_liquido - 5;
+                    return 5;
+                }
+                else
+                {
+                    int vertido =ml_liquido;
+                    ml_liquido = 0;
+                    return vertido;
+                }
+                
+            }
+            
+        }
+        else
+        {
+            System.out.println("Botella cerrada no puedo verted");
+            return 0;
+        }
+        
     }
     
     public void abrirBotella()

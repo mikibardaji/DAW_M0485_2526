@@ -30,12 +30,15 @@ public class TeoriaPOO {
         System.out.println("Intento poner 10");
         bottle.setLiquido(10);
         System.out.println("ml liquido: " + bottle.getMlLiquido());
-        System.out.println("Intento poner 5");
+        System.out.println("Intento poner Setter 5");
         bottle.setLiquido(5);
         System.out.println("ml liquido: " + bottle.getMlLiquido());
         System.out.println("relleno con 5");
         bottle.rellenar(5);
         System.out.println("ml liquido: " + bottle.getMlLiquido());
+        System.out.println("Llenando hasta el tope " + bottle.llenar());
+        System.out.println("Despues de llenar ml liquido: " + bottle.getMlLiquido());
+        
         
     }
     
