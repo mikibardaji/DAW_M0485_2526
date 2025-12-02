@@ -79,7 +79,7 @@ public class Botella {
     
     public void rellenar(int nuevo_ml)
     {
-        if ((ml_liquido+nuevo_ml)>ml_capacidad && nuevo_ml<0)
+        if ((ml_liquido+nuevo_ml)>ml_capacidad || nuevo_ml<0)
         {
             System.out.println("No puedo rellenarlo");
         }
@@ -92,8 +92,6 @@ public class Botella {
 //        return tapon;
 //    }
 
-    
-    
     //metodes especificos del objetos
     
     /**
@@ -131,7 +129,6 @@ public class Botella {
                     ml_liquido = 0;
                     return vertido;
                 }
-                
             }
             
         }
@@ -153,5 +150,15 @@ public class Botella {
         tapon = true;
     }
     
-    
+    public boolean isVacia()
+    {
+        return ml_liquido==0;
+        /*if (ml_liquido==0)
+        {
+            return true;
+        }
+        else
+            return false;
+          */   
+    }
 }
