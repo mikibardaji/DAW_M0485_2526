@@ -19,8 +19,8 @@ public class PruebasPunto {
      */
     public static void main(String[] args) {
               
-        llamadasPunto();
-        //llamadasRectangulo();
+        //llamadasPunto();
+        llamadasRectangulo();
         //llamadasArticulo();
         
 
@@ -70,6 +70,9 @@ public class PruebasPunto {
         System.err.println("-->" + rect.getX1());
         rect.setX1(8);
         rect.setY2(0);
+        
+        Rectangulo r =  Rectangulo.crearRectAleatorio();
+        r.mostrarCoordenadas();
     }
 
     private static void llamadasArticulo() {
@@ -79,7 +82,7 @@ public class PruebasPunto {
         System.out.println("me quedan " + item.getCuantosQuedan());
         System.out.println("Precio item2 " + item2.getPVP());
         System.out.println("Precio item " + item.getPVP());
-        item.setIva(0.1);
+        //item.setIva(0.1);
         System.out.println("Precio item2 " + item2.getPVP());
         System.out.println("Precio item " + item.getPVP());
     }
