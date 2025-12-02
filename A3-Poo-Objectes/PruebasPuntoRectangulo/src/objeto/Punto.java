@@ -4,6 +4,8 @@
  */
 package objeto;
 
+import java.util.Random;
+
 /**
  *
  * @author mabardaji
@@ -58,5 +60,22 @@ public class Punto {
     {
         this.x -= p.getX();
         this.y -= p.getY();
+    }
+    
+    
+    /**
+     * Crea un punto aleatorio de coordenadas entre -100 y 100
+     * @return punto aleatorio
+     */
+    public static Punto creaPuntoAleatorio()
+    {
+        //estática. Deberá crear un
+        //nuevo Punto (utiliza el constructor) con x e y entre -100 y 100, 
+        //y luego devolverlo (con return).
+        Random rd = new Random();
+        int x = rd.nextInt(-100, 101);
+        int y = rd.nextInt(-100, 101);
+        Punto p  = new Punto(x, y);
+        return p;
     }
 }

@@ -5,9 +5,9 @@
 package objeto;
 
 public class Articulo {
-    public String nombre;
+    public final String nombre;
     public double precio;
-    public double iva;
+    public final double iva;
     public int cuantosQuedan;
 
     //Añade un constructor con 4 parámetros que asigne valores a nombre, precio, iva y cuantosQuedan. 
@@ -15,6 +15,38 @@ public class Articulo {
     // cuantosQuedan no son válidos. ¿Qué coindiciones crees que podrían determinar si son válidos o no? 
     // Razónalo e implementa el código. Corrige el main y prueba a crear varios artículos. 
     // Introduce algunos con valores incorrectos para comprobar si avisa del error.
+
+    //3 variables de entrada 
+    public Articulo(String nombre, double precio, int cuantosQuedan) {
+
+        boolean error = false;
+        if (nombre == null || nombre.isEmpty()) {
+            System.err.println("Error: Nombre no válido.");
+            error = true;
+        }
+        if (precio < 0) {
+            System.err.println("Error: Precio no válido.");
+            error = true;
+        }
+
+        if (cuantosQuedan < 0) {
+            System.err.println("Error: Cantidad no válida.");
+            error = true;
+        }
+        if (!error)
+        { //solo asigno nuevos valores si eran correctos
+            this.nombre = nombre;
+            this.precio = precio;
+            this.cuantosQuedan = cuantosQuedan;
+        }
+        else
+        {
+             this.nombre = "";
+
+        }
+        this.iva =0.21;
+    }    
+    
     
     public Articulo(String nombre, double precio, double iva, int cuantosQuedan) {
 //        this.setNombre(nombre);
@@ -42,14 +74,14 @@ public class Articulo {
         { //solo asigno nuevos valores si eran correctos
             this.nombre = nombre;
             this.precio = precio;
-            this.iva = iva;
+            //this.iva = iva; perque ja esta asignat al lloc d'atribut
             this.cuantosQuedan = cuantosQuedan;
         }
         else
         {
              this.nombre = "";
         }
-        
+        this.iva =0.21;
     }
         public String getNombre() {
             return nombre;
@@ -63,16 +95,16 @@ public class Articulo {
         public int getCuantosQuedan() {
             return cuantosQuedan;
         }
-        public void setNombre(String nombre) {
-            if (nombre == null || nombre.isEmpty()) {
-            System.err.println("Error: Nombre no válido.");
-            }
-            else
-            {
-                this.nombre = nombre;
-            }
-            
-        }
+//        public void setNombre(String nombre) {
+//            if (nombre == null || nombre.isEmpty()) {
+//            System.err.println("Error: Nombre no válido.");
+//            }
+//            else
+//            {
+//                this.nombre = nombre;
+//            }
+//            
+//        }
         public void setPrecio(double precio) {
             if (precio < 0) {
             System.err.println("Error: Precio no válido.");
@@ -83,16 +115,16 @@ public class Articulo {
             }
             
         }
-        public void setIva(double iva) {
-         if (iva < 0 || iva > 1) {
-            System.err.println("Error: IVA no válido.");
-            }
-         else
-         {
-             this.iva = iva;
-         }
+//        public void setIva(double iva) {
+//         if (iva < 0 || iva > 1) {
+//            System.err.println("Error: IVA no válido.");
+//            }
+//         else
+//         {
+//             this.iva = iva;
+//         }
             
-        }
+      //  }
         public void setCuantosQuedan(int cuantosQuedan) {
         if (cuantosQuedan < 0) {
             System.err.println("Error: Cantidad no válida.");
@@ -136,5 +168,24 @@ public class Articulo {
             }
         }
 
+        /*
+        Método almacenar que actualiza los atributos del objeto tras almacenar
+        una cantidad ‘x’ (si
+es posible). Devolverá true si ha sido posible (false en caso contrario).
+        */
+        public boolean almacenar(int almacen)
+        {
+            if (almacen<0)
+            {
+                System.err.println("No puedo almacenar negativos");
+                return false;
+            }
+            else
+            {
+                this.cuantosQuedan += almacen;
+                return true;
+            }
+                   
+        }
 }
 

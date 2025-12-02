@@ -19,12 +19,9 @@ public class PruebasPunto {
      */
     public static void main(String[] args) {
               
-        //llamadasPunto();
+        llamadasPunto();
         //llamadasRectangulo();
-        Articulo item = new Articulo("PC", 10, 0.5, 10);
-        item.vender(13);
-        System.out.println("me quedan " + item.getCuantosQuedan());
-        
+        //llamadasArticulo();
         
 
     }
@@ -54,6 +51,12 @@ public class PruebasPunto {
          p1.imprime();
          p2.resta(p1); //10,10 5,0
          p2.imprime();
+         
+         System.out.println("creo punto aleatorio");
+         Punto p4 = Punto.creaPuntoAleatorio();
+         p4.imprime();
+        
+         
     }
 
     private static void llamadasRectangulo() {
@@ -67,6 +70,18 @@ public class PruebasPunto {
         System.err.println("-->" + rect.getX1());
         rect.setX1(8);
         rect.setY2(0);
+    }
+
+    private static void llamadasArticulo() {
+        Articulo item2 = new Articulo("Art1", 100, 50);
+        Articulo item = new Articulo("PC", 10,  10);
+        item.vender(13);
+        System.out.println("me quedan " + item.getCuantosQuedan());
+        System.out.println("Precio item2 " + item2.getPVP());
+        System.out.println("Precio item " + item.getPVP());
+        item.setIva(0.1);
+        System.out.println("Precio item2 " + item2.getPVP());
+        System.out.println("Precio item " + item.getPVP());
     }
     
 }
