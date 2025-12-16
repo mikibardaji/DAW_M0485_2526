@@ -9,6 +9,11 @@ package Objetos;
  * @author mabardaji
  */
 public abstract class Entrenamiento extends EquipoFutbol{
+
+    public Entrenamiento(int id, String nombre, int edad) {
+        super(id, nombre, edad);
+        salario=1500;
+    }
     
-    public abstract void entrenar();
+    //public abstract void entrenar();
 }

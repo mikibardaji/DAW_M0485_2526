@@ -11,9 +11,18 @@ package Objetos;
 public class Futbolista extends Entrenamiento {
     private int goles; //sol es de futbolista
 
+    public Futbolista(int id, String nombre, int edad,int goles) {
+        super(id,nombre,edad);
+        this.goles = goles;
+
+    }
+
+
+    
+
 
     public void jugarPartido()
     {
-        
+        System.out.println(nombre + " juego partido");
     }
 }

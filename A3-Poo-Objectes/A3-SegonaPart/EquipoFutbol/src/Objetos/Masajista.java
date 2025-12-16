@@ -10,10 +10,24 @@ package Objetos;
  */
 public class Masajista extends EquipoFutbol{
    private String titulacion;
+
+   
+   
+    public Masajista(String titulacion, int id, String nombre, int edad) {
+        super(id, nombre, edad);
+        this.titulacion = titulacion;
+        this.salario = 500;
+    }
+
+    public String getTitulacion() {
+        return titulacion;
+    }
+   
+   
    
     public void darMasaje()
     {
-        
+        System.out.println(nombre + " doy masaje");
     }      
    
 }
