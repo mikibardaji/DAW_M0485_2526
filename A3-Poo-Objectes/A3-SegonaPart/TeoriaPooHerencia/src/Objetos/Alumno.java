@@ -13,6 +13,11 @@ public class Alumno extends Persona{
     private String ciclo;
     private double nota;
 
+    public Alumno()
+    {
+        super("PEPE","ID100",23);
+        n_exp =23;
+    }
     public Alumno(String name, String ID, int phone, double expediente) {
         super(name, ID, phone); //llamada al constructor de la clase SUPERior Persona(name, ID, phone)
         n_exp = expediente;
@@ -72,6 +77,20 @@ public class Alumno extends Persona{
         else
         {
             this.ciclo = "SMX-GM";
+        }
+        
+    }
+    
+    /*Polimorfismo 2: mismo metodo pero con diferentes atributos*/
+    public void matricularse(String titulo)
+    {
+        if (titulo.equals("GS"))
+        {
+            this.ciclo = "Universidad";
+        }
+        else if (titulo.equals("GM"))
+        {
+            this.ciclo = "GS";
         }
         
     }

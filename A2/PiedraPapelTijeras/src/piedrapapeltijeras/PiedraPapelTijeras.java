@@ -50,7 +50,7 @@ public class PiedraPapelTijeras {
         Scanner sc = new Scanner(System.in);
         int respuesta;
         do {
-            System.out.println("�Qu� sacas? (0 Piedra, 1 Papel, 2 Tijera)");
+            System.out.println("¿Que sacas? (0 Piedra, 1 Papel, 2 Tijera)");
             respuesta = sc.nextInt();
         } while (respuesta < 0 || respuesta > 2);
         return respuesta;
