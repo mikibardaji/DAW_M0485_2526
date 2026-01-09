@@ -24,5 +24,6 @@ public class Futbolista extends Entrenamiento {
     public void jugarPartido()
     {
         System.out.println(nombre + " juego partido");
+        this.salario += 1000;
     }
 }
