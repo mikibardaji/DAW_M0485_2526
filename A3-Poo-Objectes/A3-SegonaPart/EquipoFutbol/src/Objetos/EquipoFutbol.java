@@ -10,7 +10,7 @@ package Objetos;
  */
 public abstract class EquipoFutbol {
     protected int id; //protected , es private excepto hijas
-    protected String nombre;
+    private String nombre;
     protected int edad; 
     protected int salario;
 
@@ -36,8 +36,21 @@ public abstract class EquipoFutbol {
     public int getSalario() {
         return salario;
     }
+
+    public void setEdad(int edad) {
+        if (edad>=16)
+        {
+            this.edad = edad;
+        }
+        else
+        {
+            System.out.println("Edad no permitida");
+        }
+    }
     
     
+    /*public abstract viajar();
+    public abstract concentrarse();*/
     public void viajar()
     {
         System.out.println(nombre + 
