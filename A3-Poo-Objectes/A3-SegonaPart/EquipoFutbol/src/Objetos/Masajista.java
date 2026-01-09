@@ -29,5 +29,10 @@ public class Masajista extends EquipoFutbol{
     {
         System.out.println(nombre + " doy masaje");
     }      
+
+    @Override
+    public void viajar() {
+        System.out.println("No viajo a ningun partido de fuera");
+    }
    
 }

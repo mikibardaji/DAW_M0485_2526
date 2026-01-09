@@ -12,7 +12,7 @@ public abstract class Entrenamiento extends EquipoFutbol{
 
     public Entrenamiento(int id, String nombre, int edad) {
         super(id, nombre, edad);
-        salario=1500;
+        salario=1500; //futbolista i entrenador
     }
     
     //public abstract void entrenar();

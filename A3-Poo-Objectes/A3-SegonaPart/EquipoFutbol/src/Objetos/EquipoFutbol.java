@@ -8,9 +8,9 @@ package Objetos;
  *
  * @author mabardaji
  */
-public abstract class EquipoFutbol {
+public abstract class EquipoFutbol implements Persona{ //extends Object
     protected int id; //protected , es private excepto hijas
-    private String nombre;
+    protected String nombre;
     protected int edad; 
     protected int salario;
 
@@ -58,8 +58,48 @@ public abstract class EquipoFutbol {
     }
             
 
-    public final void concentrarse()
+    public final void concentrarse() /*codigo comun para todas las clases hijas*/
     {
         System.out.println(nombre + " me concentro en el hotel");
     }
+
+    @Override  //object
+    public boolean equals(Object obj) {
+        if (obj == null)
+        {
+            return false; //no es igual
+        }
+        if (this == obj)
+        {
+            return true;
+        }
+        if (!(obj instanceof EquipoFutbol))
+        {
+            return false;
+        }
+        //los campos importantes para saber si son iguale
+        EquipoFutbol other = (EquipoFutbol) obj;
+        //this i el other los dos son equipoFtubol
+        // el campo es el id
+        if (!this.nombre.equals(other.nombre)
+                || (this.id != other.id))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    @Override
+    public void saludar()
+    {
+        System.out.println("Hola soy " + nombre);
+        
+    }    
+    
+    
+    
+    
 }

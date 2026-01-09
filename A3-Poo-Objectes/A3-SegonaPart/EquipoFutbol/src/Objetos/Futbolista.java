@@ -23,6 +23,7 @@ public class Futbolista extends Entrenamiento {
 
     public void jugarPartido()
     {
+        //this.nombre = "PEPE"; //si es protected si puedo cambiarlo, si es private clase superior NO
         System.out.println(nombre + " juego partido");
         this.salario += 1000;
     }

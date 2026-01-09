@@ -17,17 +17,18 @@ public class Entrenador extends Entrenamiento {
         this.tieneTitulo = tieneTitulo;
     }
 
-    public boolean isTieneTitulo() {
-        return tieneTitulo;
-    }
-    
     //constructor con titulo a cierto por defecto
     public Entrenador(int id, String nombre, int edad) {
         super(id, nombre, edad);
         this.tieneTitulo = true;
+    }    
+    
+    
+    public boolean isTieneTitulo() {
+        return tieneTitulo;
     }
     
-    
+
     public void dirigirPartido()
     {
         System.out.println(nombre + " dirijo el partido");
