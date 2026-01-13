@@ -4,7 +4,6 @@
  */
 package equipofutbol;
 
-import Objetos.Entrenamiento;
 import Objetos.Futbolista;
 import Objetos.Presidente;
 
