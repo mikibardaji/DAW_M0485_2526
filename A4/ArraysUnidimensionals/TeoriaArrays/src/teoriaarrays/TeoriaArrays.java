@@ -27,7 +27,22 @@ public class TeoriaArrays {
         //calcular la media de mis notas
         
         calcularMedia(notasModulo485);
-        detectarCuantasRasSuspendidas(notasModulo485);
+        System.out.println("En junio tendras " + 
+                detectarCuantasRasSuspendidas(notasModulo485) + " a recuperar");
+        
+        System.out.println("Excelentes que has sacado " 
+                + contarExcelentes(notasModulo485));
+        if (recuperacionJunio(notasModulo485))
+        {
+            System.out.println("Tienes que ir a Junio");
+        }
+        else
+        {
+            System.out.println("Vacaciones");
+        }
+        
+        ;
+        System.out.println("has sacado " +consultarNotaRa(notasModulo485) );
     }
 
     /* pregunte las notas al usuario y las introduzca*/
@@ -78,7 +93,85 @@ public class TeoriaArrays {
      * has suspendido y decir cuantas ra's tienes suspendidas
      * @param notasModulo485 
      */
-    private static void detectarCuantasRasSuspendidas(int[] notasModulo485) {
-    
+    private static int detectarCuantasRasSuspendidas(int[] notasModulo485) 
+    {
+        int contRaSuspendidas=0;
+        for (int indice = 0; indice < notasModulo485.length; indice++) 
+        {
+            if (notasModulo485[indice]<5)
+            { //si entro esta suspendida
+                contRaSuspendidas++; //contador
+            }   
+        }
+        //muestro frase si es void
+        return contRaSuspendidas;
+    }
+
+    private static int contarExcelentes(int[] notasModulo485) {
+         int contExcelentes=0;
+         for (int i = 0; i < notasModulo485.length; i++) {
+             if (notasModulo485[i]>=9)
+            { //si entro esta suspendida
+                contExcelentes++; //contador
+                //chivato boolean true
+                //acumulativa = acumulativa +/-/*// posicion
+            }  
+        }
+        return contExcelentes;
+    }
+
+    /**
+     * detecta si hay alguna nota suspendida
+     * Sin importar si hay mas de una
+     * @param notasModulo485
+     * @return true si tienes alguna nota suspendida
+     */
+    private static boolean recuperacionJunio(int[] notasModulo485) {
+        int ra=0; //indice
+        boolean suspendido = false;
+        
+        for (int i = 0; i < notasModulo485.length; i++) 
+        {
+            if (notasModulo485[ra]<5)
+            {
+                suspendido = true;
+                i = notasModulo485.length; //para que salga for sino break
+            }
+        }
+        
+        
+        do
+        {
+            if (notasModulo485[ra]<5)
+            {
+                suspendido = true;
+            }
+            else
+            { //si no encontrador
+                ra++;
+            }     
+        /*}while(ra<notasModulo485.length
+                && suspendido ==false);*/
+        }while(ra<notasModulo485.length
+                && !suspendido);
+        /*if (suspendido==true)
+        {
+            return true;
+        }*/
+        return suspendido;
+    }
+
+    /**
+     * Te tiene que preguntar (scanner) que ra quieres saber (posicion)
+     * y devolverte la nota
+     * @param notasModulo485
+     * @return nota del ra consultad
+     */
+    private static int consultarNotaRa(int[] notasModulo485) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Que ra quieres saber la nota");
+        int ra = sc.nextInt(); //posicion dentro del array
+        //return notasModulo485[ra]; 
+        return notasModulo485[ra-1]; 
     }
 }

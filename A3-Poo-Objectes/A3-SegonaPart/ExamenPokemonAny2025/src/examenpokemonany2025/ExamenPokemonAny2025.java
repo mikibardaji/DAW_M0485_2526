@@ -23,7 +23,7 @@ public class ExamenPokemonAny2025 {
      */
     public static void main(String[] args) {
         Pokemon ash, bruno;
-
+        ash = new Pokemon();
         ash = crearPokemon2();
         bruno = crearPokemon2();
         
