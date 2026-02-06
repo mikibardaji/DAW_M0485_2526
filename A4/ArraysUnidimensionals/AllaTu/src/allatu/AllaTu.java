@@ -4,6 +4,7 @@
  */
 package allatu;
 
+import Objetos.Caja;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,14 +20,15 @@ public class AllaTu {
     public static void main(String[] args) {
         int[] premis = ponerListaPremios();
         mostrarPremiosRestantes(premis);
-        int[] cajas = sortearCajas(premis);
+        Caja[] cajas = sortearCajas(premis);
         mostrarCajasCerradas(cajas);
         final int cajaJugador = escogerCajaJugador(cajas.length, "Que caja quieres para ti");
+        cajas[cajaJugador].setElegida(true);
         int cajaAbrir, turno=0, ofertaBanquero=0;
         boolean plantar=false;
         do
         {
-            cajaAbrir = escogerCajaJugador(cajas.length, "Que caja vas a abrir ");
+            cajaAbrir = escogerCajaJugador(cajas.length, "Que caja vas a eliminar ");
             mostrarValorCaja(cajaAbrir, cajas, premis);
             turno = contarTurno(turno);
             mostrarPremiosRestantes(premis);
@@ -92,15 +94,15 @@ public class AllaTu {
     •	Salida:
     int oferta ? Media de los valores restantes (oferta del banquero).
     */
-    public static int llamadaBanquero(int[] cajas)
+    public static int llamadaBanquero(Caja[] cajas)
     {
         //la posicion que esta a 0, esta ya abierta
         int oferta_acumuladora = 0;
         int cerradas=0, oferta;
         for (int i = 0; i < cajas.length; i++) {
-            if (cajas[i]!=0)
+            if (cajas[i].isCerrada())
             {
-                oferta_acumuladora += cajas[i]; //me vale porque las abiertas valen 0
+                oferta_acumuladora += cajas[i].getPremio(); //me vale porque las abiertas valen 0
                 cerradas++; //contador cajas
             }
             
@@ -123,11 +125,12 @@ public class AllaTu {
         int[] cajasPremios
         •	Salida: nada 
     */
-    public static void mostrarCajasCerradas(int[] cajas)    
+    public static void mostrarCajasCerradas(Caja[] cajas)    
     {
         System.out.println("Cajas por abrir");
         for (int i = 0; i < cajas.length; i++) {
-            if (cajas[i]>0)
+            //if (!cajas[i].isAbierta())
+            if (cajas[i].isCerrada() && !cajas[i].isElegida())
             {
                 System.out.print((i+1) + " - " );
             }
@@ -153,16 +156,17 @@ public class AllaTu {
     •	Salida:
     int[] cajas ? Array de cajas con los premios colocados de forma desordenada.
     */
-    public static int[] sortearCajas(int[] premios)
+    public static Caja[] sortearCajas(int[] premios)
     {
-        int[] cajas = new int[premios.length];
+        Caja[] cajas = new Caja[premios.length];
         Random rd = new Random();
         int pos_azar;
         for (int indice_premio = 0; indice_premio < premios.length; indice_premio++) {
             do{
-            pos_azar = rd.nextInt(premios.length);
-            }while(cajas[pos_azar]!=0); //la psicio YA tiene premios
-            cajas[pos_azar] = premios[indice_premio];
+                pos_azar = rd.nextInt(premios.length);
+            }while(cajas[pos_azar]!=null); //la psicio YA tiene premios
+            //premios[indice_premio];
+            cajas[pos_azar] = new Caja(premios[indice_premio]);
         }
         return cajas;
     }
@@ -202,24 +206,22 @@ public class AllaTu {
         o	La posición de la caja abierta se pone a 0.
         o	En el array de premiosOrdenados también se busca que posición tiene el premio abierto y la marca a 0 .
     */
-    public static void mostrarValorCaja(int posicion, int[] cajas, int[] premiosOrdenados)
+    public static void mostrarValorCaja(int posicion, Caja[] cajas, int[] premiosOrdenados)
     {
         
-        System.out.println("Has perdido " + cajas[posicion] + "€");
+        System.out.println("Has perdido " + cajas[posicion].getPremio() + "€");
         for (int i = 0; i < premiosOrdenados.length; i++) 
         {
-            if (premiosOrdenados[i]==cajas[posicion])
+            if (premiosOrdenados[i]==cajas[posicion].getPremio())
             {
                 premiosOrdenados[i] = 0;
                 //break;
                 i = premiosOrdenados.length;
             }
-            
         }
         
-        
         //al final para no perder el valor
-        cajas[posicion] = 0; //abierta
+        cajas[posicion].setAbierta(true); //abierta
         
     }
     
@@ -265,38 +267,42 @@ Muestra el resultado final de la partida.
     public static void finalJuego(boolean plantado,
                                 int dineroOferta, 
                                 int cajaElegida, 
-                                int[] cajas)
+                                Caja[] cajas)
     {
         if (plantado)
         {
             System.out.println("Te has llevado de la banca" + dineroOferta);
-            System.out.println("tu caja tenia " + cajas[cajaElegida]);
+            System.out.println("tu caja tenia " + cajas[cajaElegida].getPremio());
         }
         else
         {
-            System.out.println("tu caja tiene " + cajas[cajaElegida]);
+            System.out.println("tu caja tiene " + cajas[cajaElegida].getPremio());
         }
             
     }
 
     /**
      * tiene que mirar si no quedan cajas por abrir
-     * Contando que la caja del jugador siempre no estara abiert
+     * Contando que la caja del jugador siempre estara cerrada o sea que 
+     * una siempre esta cerrada.
      * @param cajas
      * @return 
      */
-    private static boolean noQuedanCajas(int[] cajas) 
+    private static boolean noQuedanCajas(Caja[] cajas) 
     {
-        int cerradas=0; //una es la deljugador
+        //int cerradas=0; //una es la deljugador
         for (int i = 0; i < cajas.length; i++) {
-            if (cajas[i]!=0)
+            if (cajas[i].isCerrada()
+                && !cajas[i].isElegida()
+                    )
             {
-                cerradas++;
-            }
-            if (cerradas>1)
-            {//no hace falta
+                //cerradas++;
                 return true;
             }
+//            if (cerradas>1)
+//            {//no hace falta
+//                return true;
+//            }
         }
         return false;
     }

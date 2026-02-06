@@ -11,14 +11,43 @@ package Objetos;
 public class Caja {
     private int premio;
     private boolean abierta;
+    private boolean elegida;
     //pot haver-hi més atributs
-    
-    
-    //constructors, els que cregueu, potser no cal amb otts els atributs ja que els caixes sempre estan tancades
-    
-    
-    //getters setters
-    
-    
     //algun altre metode???
+    public Caja(int premio) {
+        this.premio = premio;
+        abierta = false;
+        elegida = false;
+    }
+    
+    public int getPremio() {
+        return premio;
+    }
+
+    public void setPremio(int premio) {
+        this.premio = premio;
+    }
+
+    public boolean isAbierta() {
+        return abierta;
+    }
+
+    public boolean isCerrada() {
+        return abierta==false;
+    }
+    public void setAbierta(boolean abierta) {
+        this.abierta = abierta;
+    }
+
+    public boolean isElegida() {
+        return elegida;
+    }
+
+    //constructors, els que cregueu, potser no cal amb otts els atributs ja que els caixes sempre estan tancades
+    public void setElegida(boolean elegida) {
+        this.elegida = elegida;
+    }
+
+    //getters setters
+
 }
