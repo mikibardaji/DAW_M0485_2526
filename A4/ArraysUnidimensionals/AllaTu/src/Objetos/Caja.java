@@ -32,7 +32,7 @@ public class Caja {
         return abierta;
     }
 
-    public boolean isCerrada() {
+    public boolean isCerrada() { //creo este getter
         return abierta==false;
     }
     public void setAbierta(boolean abierta) {

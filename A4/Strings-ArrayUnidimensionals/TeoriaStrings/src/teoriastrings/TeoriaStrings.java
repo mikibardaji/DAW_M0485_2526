@@ -26,7 +26,7 @@ public class TeoriaStrings {
         for (int i = 0; i < frase.length(); i++) {
             //System.out.println(frase[i]); aixo no
             System.out.println(frase.charAt(i));
-            if (frase.charAt(i)=='o')
+            if (frase.charAt(i)=='l')
             {
                 cont_l++;
             }
