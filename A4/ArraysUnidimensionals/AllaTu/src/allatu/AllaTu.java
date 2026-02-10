@@ -56,7 +56,7 @@ public class AllaTu {
     */
     public static int[] ponerListaPremios()
     {
-        int[] premis = {1,5,10,20,30,40,50,60,100,400,500,800,10000,2000,5000,10000,50000};
+        int[] premis = {-1,5,10,20,30,40,50,60,100,400,500,800,10000,2000,5000,10000,50000};
 //        premis[0] = 10;
 //        premis[1] = 50;
         return premis;
@@ -166,7 +166,14 @@ public class AllaTu {
                 pos_azar = rd.nextInt(premios.length);
             }while(cajas[pos_azar]!=null); //la psicio YA tiene premios
             //premios[indice_premio];
+            try
+            {
             cajas[pos_azar] = new Caja(premios[indice_premio]);
+            }
+            catch(Exception ex)
+            {
+                System.out.println("La caja " + pos_azar + " se ha quedado con 0 euros");
+            }
         }
         return cajas;
     }
