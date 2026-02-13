@@ -24,7 +24,6 @@ public class Caja {
         }
         else
         {
-            
             this.premio = 0; //que se quede con un valor posible
             //throw new PremiNegativoException(premio);
            //NO LANZO LA EXCEPCION PORQUE SI LA LANZO EL OBJETO 

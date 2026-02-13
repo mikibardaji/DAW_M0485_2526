@@ -39,7 +39,12 @@ public class Fisioterapeuta extends ProfessionalSanitari {
         return sessionsProgramades;
     }
 
-    public void setSessionsProgramades(int sessionsProgramades) {
+    public void setSessionsProgramades(int sessionsProgramades) throws SesionsMinimesException {
+        if (sessionsProgramades<5)
+        {
+            this.sessionsProgramades = 5;
+            throw new SesionsMinimesException();
+        }
         this.sessionsProgramades = sessionsProgramades;
     }
 

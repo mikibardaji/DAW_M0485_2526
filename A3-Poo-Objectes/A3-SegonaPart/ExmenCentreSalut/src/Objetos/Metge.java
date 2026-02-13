@@ -60,7 +60,17 @@ public class Metge  extends ProfessionalSanitari implements Facturable{
         return anysExperiencia;
     }
 
-    public void setAnysExperiencia(int anysExperiencia) {
+    public void setAnysExperiencia(int anysExperiencia) throws YearsExperienceException {
+        if (anysExperiencia<0)
+        {
+            if (this.anysExperiencia==0)
+            {
+                this.anysExperiencia = 1;
+            }
+            //no le cambias los años de experiencia
+            throw new YearsExperienceException();
+            //throw new YearsExperienceException(anysExperiencia);
+        }
         this.anysExperiencia = anysExperiencia;
     }
     

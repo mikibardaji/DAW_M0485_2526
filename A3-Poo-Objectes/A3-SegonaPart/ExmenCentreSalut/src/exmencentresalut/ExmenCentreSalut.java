@@ -9,6 +9,9 @@ import Objetos.GestorCentre;
 import Objetos.Infermer;
 import Objetos.Metge;
 import Objetos.Pacient;
+import Objetos.SesionsMinimesException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,7 +46,14 @@ public class ExmenCentreSalut {
         System.out.println("Cost visita Infermer " + m1.aplicarDescompte(inf));
         System.out.println(m1.getNom());
         System.out.println(GestorCentre.calcularCostTotal(m1, inf, fisio));
+        
+        try {
+            fisio.setSessionsProgramades(3);
+        } catch (SesionsMinimesException ex) {
+            System.out.println("Las sesiones programadas no son correctas se han quedado en 5");
+        }
   
+        
     }
     
 }
