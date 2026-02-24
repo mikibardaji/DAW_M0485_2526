@@ -57,7 +57,14 @@ public class Jugadors {
             return false;
         }
         final Jugadors other = (Jugadors) obj;
+        // si solo quisiera return this.nom.equalsIgnoreCase(other.nom);
+        // si solo quiero que cuente el dorsal 
         return this.dorsal == other.dorsal;
+        //solo seran iguales si coinciden el dorsal Y el nombre
+        /*if (this.dorsal!=other.dorsal)
+            return false;
+        else
+            return this.nom.equalsIgnoreCase(other.nom);*/
     }
-    
+   
 }
