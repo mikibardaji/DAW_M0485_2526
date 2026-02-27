@@ -264,10 +264,7 @@ public class CatalegPelis {
             System.out.println(pelicula);
         }
         System.out.println("Peliculas mostradas: " + encontrada.size());
-        
-        
     }
 
-    
     
 }
