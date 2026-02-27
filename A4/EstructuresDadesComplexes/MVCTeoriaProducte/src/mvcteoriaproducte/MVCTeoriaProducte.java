@@ -2,24 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package mvcproductes;
+package mvcteoriaproducte;
 
-import Modelo.IdNegativaException;
-import Modelo.Producte;
-import Modelo.RepositoriPleException;
-import Modelo.RepositoriProductesDAO;
+import java.util.List;
 import java.util.Scanner;
+import modelo.*;
 
 /**
  *
  * @author mabardaji
  */
-public class MVCProductes {
+public class MVCTeoriaProducte {
 
     private Scanner scanner;
 
     public static void main(String[] args) {
-        MVCProductes app = new MVCProductes();
+        MVCTeoriaProducte app = new MVCTeoriaProducte();
         app.run();
     }
 
@@ -34,8 +32,8 @@ public class MVCProductes {
         int opcio;
 
         do {
-            mostrarMenu();
-            opcio = scanner.nextInt();
+            mostrarMenu(); //Vista. mostrarDatosUsuario
+            opcio = scanner.nextInt(); //recogeDatos
 
             switch (opcio) {
                 case 1:
@@ -74,39 +72,45 @@ public class MVCProductes {
 
     private void afegirProducte(RepositoriProductesDAO repositori) {
         try {
+            /* 1.- Opcional pedir datos entrada*/
             System.out.print("ID: ");
             int id = scanner.nextInt();
             scanner.nextLine();
-
             System.out.print("Nom: ");
             String nom = scanner.nextLine();
-
             System.out.print("Preu: ");
             double preu = scanner.nextDouble();
 
             Producte p = new Producte(id, nom, preu);
-            repositori.afegirProducte(p);
-
-            System.out.println("Producte afegit correctament.");
-
+            /* 2.- Pasar datos al DAO*/
+            if (repositori.afegirProducte(p))
+            ///* 3.- Mostrar datos salida  o consecuencia*/
+            {
+                System.out.println("Producte afegit correctament.");
+            }
+            else
+                System.out.println("No se ha añadido " + p);
         } catch (RepositoriPleException e) {
+            /* 3.- Mostrar datos salida  o consecuencia*/
             System.out.println("ERROR: " + e.getMessage());
         }
     }
 
     private void llistarProductes(RepositoriProductesDAO repositori) {
+        List<Producte> todos = repositori.obtenirTots();
         System.out.println("\n--- LLISTA DE PRODUCTES ---");
-        for (Producte p : repositori.obtenirTots()) {
+        for (Producte p : todos) {
             System.out.println(p);
         }
     }
 
     private void cercarProducte(RepositoriProductesDAO repositori) {
         try {
+            /* Opcional datos entrada para el repositori*/
             System.out.print("Introdueix ID a cercar: ");
             int id = scanner.nextInt();
 
-            Producte trobat = repositori.cercarPerId(id);
+            Producte trobat = repositori.cercarPerId(id); /*Interaccio DAO*/
 
             if (trobat != null) {
                 System.out.println("Producte trobat:");
@@ -124,14 +128,12 @@ public class MVCProductes {
         System.out.print("Introdueix ID a eliminar: ");
         int id = scanner.nextInt();
 
-        if (repositori.eliminarProducte(id)) 
-        {
+        if (repositori.eliminarProducte(id)) {
             System.out.println("Producte eliminat.");
-        } 
-        else 
-        {
+        } else {
             System.out.println("No s'ha trobat el producte.");
         }
     }
+
     
 }
