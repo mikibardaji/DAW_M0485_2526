@@ -38,17 +38,17 @@ public class CatalegPelis {
 
                 case 2:
                     System.out.println("Has seleccionat: Buscar pel·lícula per ID");
-                    // TODO: Implementar cerca per ID
+                    buscarPeliId(cataleg);
                     break;
 
                 case 3:
                     System.out.println("Has seleccionat: Buscar pel·lícula per nom");
-                    // TODO: Implementar cerca per nom
+                    buscarPeliNombre(cataleg);
                     break;
 
                 case 4:
                     System.out.println("Has seleccionat: Borrar pel·lícula");
-                    // TODO: Implementar esborrar pel·lícula
+                    borrarPeli(cataleg);
                     break;
 
                 case 5:
@@ -56,6 +56,16 @@ public class CatalegPelis {
                     llistarPelicules(cataleg);
                     break;
 
+                case 6:
+                    System.out.println("Has seleccionat: Borrar pel·lícula nombre");
+                    borrarPeliNombre(cataleg);
+                    break;                    
+
+
+                case 7:
+                    System.out.println("Has seleccionat: Filtrar por genero");
+                    filtrarGenere(cataleg);
+                    break; 
                 case 0:
                     System.out.println("Sortint del programa...");
                     break;
@@ -78,6 +88,8 @@ public class CatalegPelis {
         System.out.println("3.- Buscar pel·lícula per nom");
         System.out.println("4.- Borrar pel·lícula");
         System.out.println("5.- Llistar pel·lícules");
+        System.out.println("6.- Borrar pel·lícula por nombre");
+        System.out.println("7.- Filtrar por Genero");
         System.out.println("0.- Sortir");
         System.out.print("Escull una opció: ");
     }
@@ -91,11 +103,11 @@ public class CatalegPelis {
             try {
                 opcio = scanner.nextInt();
 
-                if (opcio >= 0 && opcio <= 5) {    
+                if (opcio >= 0 && opcio <= 7) {    
                     valida = true;
                     return opcio;
                 } else {
-                    System.out.print("Opció no vàlida. Introdueix un número entre 0 i 5: ");
+                    System.out.print("Opció no vàlida. Introdueix un número entre 0 i 7: ");
                     //no toco valida
                 }
 
@@ -145,6 +157,117 @@ public class CatalegPelis {
         cataleg.add(anyadir);
         System.out.println("Pelicula añadida" + anyadir);
     }
+
+    private static void buscarPeliId(List<Pelicula> cataleg) {
+         Scanner sc = new Scanner(System.in);
+        System.out.print("Pon el id de la pelicula a buscar:");
+        int codiPel = sc.nextInt();
+        
+//        for (Pelicula pelicula : cataleg) {
+//            if (pelicula.getCodiPel()==id)
+//            {
+//                System.out.println("Pelicula encontrada" + pelicula);
+//            }
+//        }
+        Pelicula buscar = new Pelicula(codiPel, "inventado", "TERROR", true);
+        int pos = cataleg.indexOf(buscar);
+        if (pos!=-1) //la ha encontrado
+        {
+            System.out.println("Pelicula encontrada: " + cataleg.get(pos));
+        }
+        else
+        {
+            System.out.println("Peli no esta...");
+        }
+    }
+
+    private static void buscarPeliNombre(List<Pelicula> cataleg) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Pon el nombre de la pelicula a buscar:");
+        String nombre = sc.nextLine();
+        
+        boolean encontrada = false;
+        for (int i = 0; i < cataleg.size(); i++) {
+            if (cataleg.get(i).getTitol().equalsIgnoreCase(nombre))
+            {
+                System.out.println("Pelicula encontrada: " + cataleg.get(i));
+                encontrada =true;
+            }
+        }
+        if (!encontrada)
+        {
+            System.out.println("Peli no esta...");
+        }
+            
+    }
+
+    private static void borrarPeli(List<Pelicula> cataleg) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Pon el id de la pelicula a borrar:");
+        int codiPel = sc.nextInt();
+        
+        Pelicula delete = new Pelicula(codiPel, "Pelicula a borrar", "TERROR", false);
+        if (cataleg.remove(delete))
+        {
+            System.out.println("Borrada peli con id " + codiPel);
+        }
+        else
+        {
+            System.out.println("Pelicula no encontrada para borrar");
+        }
+        
+    }
+
+    private static void borrarPeliNombre(List<Pelicula> cataleg) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Pon el Nombre de la pelicula a borrar:");
+        String nombrePel = sc.nextLine();
+        Pelicula borrada;
+        boolean borrado = false;
+        for (int i = 0; i < cataleg.size(); i++) {
+            if (cataleg.get(i).getTitol().equalsIgnoreCase(nombrePel))
+            {
+                borrada = cataleg.remove(i);
+                System.out.println("Pelicula borrada " + borrada); //To String
+                borrado = true; //detectar que he entrado en el if
+            }  
+        }
+        if (borrado == false) //!borrado
+        {
+            System.out.println("Pelicula no existe");
+        }
+            
+    }
+
+    /*
+    encontrar todas las peliculas de mi catalogo
+    que pertenezcan a un genero en concreto
+    */
+    private static void filtrarGenere(List<Pelicula> cataleg) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Pon el genero de las peliculas a buscar:");
+        String generoBuscado = sc.nextLine();
+        
+        List<Pelicula> encontrada = new ArrayList<>();
+        //buscarlas todas sin mostrarlas
+        //todas las que coincidan las pongo en otra estructura
+        for (Pelicula peli : cataleg) {
+            if (peli.getGenere().equalsIgnoreCase(generoBuscado))
+            { //guardar en otra estructura
+                encontrada.add(peli); //se van añadiendo de una en una
+            } 
+        }
+        //en la ArrayList encontrada estaran todas las del genero
+        
+        System.out.println("Pelis del genero " + generoBuscado);
+        for (Pelicula pelicula : encontrada) {
+            System.out.println(pelicula);
+        }
+        System.out.println("Peliculas mostradas: " + encontrada.size());
+        
+        
+    }
+
     
     
 }
