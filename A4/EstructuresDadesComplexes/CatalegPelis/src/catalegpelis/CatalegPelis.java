@@ -145,7 +145,7 @@ public class CatalegPelis {
         String genero = sc.nextLine();
         System.out.print("Tiene segunda parte?:");
         String segunda = sc.nextLine();
-         Pelicula anyadir;
+        Pelicula anyadir;
         if (segunda.equalsIgnoreCase("SI"))
         {
             anyadir = new Pelicula(id, titulo, genero, true);

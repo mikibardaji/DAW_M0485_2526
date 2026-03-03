@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Objetos;
+package Modelo;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Pelicula {
     public Pelicula(int codiPel, String Titol, String genere, boolean segundaParte) {
         this.codiPel = codiPel;
         this.Titol = Titol;
-        this.setGenere(genere);
+        this.genere = genere;
         this.segundaParte = segundaParte;
     }
 
@@ -41,7 +41,7 @@ public class Pelicula {
         return genere;
     }
 
-    public void setGenere(String genere) {
+    public void setGenere(String genere) throws InvalidGeneroException {
         //genere = genere.toUpperCase();
         if ("WESTERN".equalsIgnoreCase(genere) 
                 || "CIENCIA FICCIO".equalsIgnoreCase(genere)
@@ -51,12 +51,12 @@ public class Pelicula {
         }
         else
         {
-            System.out.println("Genero incorrecto, lo paso a terrro " + genere);
-            this.genere = "TERROR";
+            throw new InvalidGeneroException();
+            
         }
     }
 
-    public boolean isSegundaParte() {
+    public boolean getSegundaParte() {
         return segundaParte;
     }
 
