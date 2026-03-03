@@ -34,12 +34,36 @@ public class RepositoriProductesDAO {
     }
     
     public boolean eliminarProducte(int id) {
-        return true;
+        Producte delete = new Producte(id, "", 0); //campo equals informado
+        
+        return productes.remove(delete);
+        //delete es por elementos que tengan precio 
+        //igual a 10
+//        boolean borrado=false;
+//        for (int i = 0; i < productes.size(); i++)
+//        {
+//          if (productes.get(i).getPreu() == 10)
+//          {
+//              productes.remove(id); //afegir els borrats a un arrayList
+//              //i al finalitzar retornar-ho
+//              borrado = true;
+//          }
+//        }
+//        return borrado;
     }
     
     public List<Producte> obtenirTots()
     {
-        return null;
+        List<Producte> productosSeleccionados = new ArrayList();
+        
+        for (Producte producto : productes) {
+            //criterio de seleccion (if si es necesario)
+            // y los que entren en el criterio añado a la salida
+            //ejemplo if (producto.getPrecio < 10)
+            productosSeleccionados.add(producto);
+        }
+        
+        return productosSeleccionados;
     }
     // TO DO: altres mÃ¨todes com cercarPerNom, cercarPerPreu, etc.
 }

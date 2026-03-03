@@ -27,7 +27,7 @@ public class MVCTeoriaProducte {
 
         System.out.print("Introdueix capacitat màxima del repositori: ");
         int capacitat = scanner.nextInt();
-
+        //inicializar DAO
         RepositoriProductesDAO repositori = new RepositoriProductesDAO(capacitat);
 
         int opcio;

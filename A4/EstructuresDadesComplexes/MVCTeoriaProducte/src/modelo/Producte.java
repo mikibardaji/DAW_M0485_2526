@@ -26,4 +26,18 @@ public class Producte {
         Producte producte = (Producte) o;
         return id == producte.id;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public double getPreu() {
+        return preu;
+    }
+    
+    
 }
