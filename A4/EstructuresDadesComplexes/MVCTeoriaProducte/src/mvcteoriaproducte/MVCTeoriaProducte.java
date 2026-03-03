@@ -4,6 +4,7 @@
  */
 package mvcteoriaproducte;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import modelo.*;
@@ -71,6 +72,7 @@ public class MVCTeoriaProducte {
     }
 
     private void afegirProducte(RepositoriProductesDAO repositori) {
+        
         try {
             /* 1.- Opcional pedir datos entrada*/
             System.out.print("ID: ");
@@ -92,7 +94,10 @@ public class MVCTeoriaProducte {
                 System.out.println("No se ha añadido " + p);
         } catch (RepositoriPleException e) {
             /* 3.- Mostrar datos salida  o consecuencia*/
-            System.out.println("ERROR: " + e.getMessage());
+            System.err.println("ERROR: " + e.getMessage());
+        } catch (InputMismatchException e)
+        {
+            System.err.println("Error: La id debe ser negativa ");
         }
     }
 
