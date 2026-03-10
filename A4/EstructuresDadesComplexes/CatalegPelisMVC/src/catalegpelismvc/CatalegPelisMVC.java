@@ -196,6 +196,11 @@ public class CatalegPelisMVC {
         {
             segunda = false;
         }
+        /* Si volgues directament sol pelis amb segona part
+        No faria falta la pregunta
+        podria ficar una simple linea uqe fos
+        boolean segunda = true;
+        */
         List<Pelicula> all = cataleg.AllPelisSecondPart(segunda);
         for (Pelicula peli : all) {
             System.out.println(peli);
