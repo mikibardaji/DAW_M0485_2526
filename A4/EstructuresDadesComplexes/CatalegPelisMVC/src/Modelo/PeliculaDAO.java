@@ -31,11 +31,11 @@ public class PeliculaDAO {
         por ejemplo no queremos pelis de 18 años
         lanzaria excepcion (falta atributo edad en pelis)*/
         return cataleg.add(anyadir);
-        
+        //CreateRUD
     }
 
     public List<Pelicula> allPelis() {
-        return cataleg;
+        return cataleg; //cReadud
     }
 
     public List<Pelicula> AllPelisSecondPart(boolean segunda) {
@@ -47,7 +47,14 @@ public class PeliculaDAO {
                 seleccionadas.add(cataleg.get(i));
             }
         }
-        return seleccionadas;
+        return seleccionadas; //cReadud
+    }
+
+    public boolean borrarPelicula(Pelicula fakeDelete) {
+        /*validaciones si hacen delete
+        tuviera prohubido borrar las de western*/
+        
+        return cataleg.remove(fakeDelete); //equals
     }
 
   

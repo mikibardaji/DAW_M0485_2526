@@ -164,7 +164,22 @@ public class CatalegPelisMVC {
     }
 
     private void borrarPeli(PeliculaDAO cataleg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        /*1 pedir datos entrada*/
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Pon id de peli a borrar? ");
+        int idPel = sc.nextInt();//campo del equals
+        
+        Pelicula fakeDelete = new Pelicula(idPel, "Delete", "TERROR", true);
+        /*interaccionar modelo CRUDelete*/
+        if (cataleg.borrarPelicula(fakeDelete))
+        {
+            System.out.println("Has borrado la peli " + fakeDelete.getCodiPel());
+        }
+        else
+        {
+            System.out.println("No has borrado la peli con id " + + fakeDelete.getCodiPel());
+        }
+        /*salida de datos*/
     }
 
     private void llistarPelicules(PeliculaDAO cataleg) {
