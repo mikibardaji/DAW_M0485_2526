@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class PeliculaDAO {
     List<Pelicula> cataleg;
 
     public PeliculaDAO() {
-        this.cataleg = new ArrayList<>();
+        this.cataleg = new LinkedList<>();
         this.afegirPelisInicials();
     }
 

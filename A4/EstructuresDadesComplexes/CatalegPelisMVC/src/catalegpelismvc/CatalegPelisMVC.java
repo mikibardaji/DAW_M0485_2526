@@ -82,7 +82,7 @@ public class CatalegPelisMVC {
 
                 case 9:
                     System.out.println("Has seleccionat: Llistar pel·lícules ordenadas por nombre");
-                    llistarPeliculesNombre(cataleg);
+                    llistarPeliculesOrdenades(cataleg);
                     break;                    
             }
 
@@ -264,16 +264,45 @@ public class CatalegPelisMVC {
         menuConsola.afegirOpcio("Borrar pel·lícula por nombre");
         menuConsola.afegirOpcio("Filtrar por Genero");
         menuConsola.afegirOpcio("Afegir Pel·lícula");
-        menuConsola.afegirOpcio("Llistar pel·lícules por nombre");
+        menuConsola.afegirOpcio("Llistar pel·lícules ordenades");
     }
 
-    private void llistarPeliculesNombre(PeliculaDAO cataleg) {
-        List<Pelicula> all = cataleg.allPelis();        
-        Collections.sort(all); //el objeto que contiene el List tiene la interface Comparable implementada
+    private void llistarPeliculesOrdenades(PeliculaDAO cataleg) {
+        List<Pelicula> all = cataleg.allPelis();   
+        Menu menuOrdenacion = new Menu("Eleccion orden");
+        anyadirOpcionesMenu(menuOrdenacion);
+        
+        menuOrdenacion.mostrarMenu();
+        int opcion = menuOrdenacion.llegirOpcioValida();
+        switch(opcion)
+        {
+            case 1:
+                Collections.sort(all,Comparator.comparing(Pelicula::getCodiPel));
+                break;
+            case 2:
+                Collections.sort(all,Comparator.comparing(Pelicula::getTitol));
+                break;   
+            case 3:
+                Collections.sort(all,Comparator.comparing(Pelicula::getGenere));
+                break;    
+            case 4:
+                Collections.sort(all,Comparator.comparing(Pelicula::getSegundaParte));
+                break;    
+        }  
+               
+        //Collections.sort(all); //el objeto que contiene el List tiene la interface Comparable implementada
+        //Collections.sort(all,Comparator.comparing(Pelicula::getGenere));
         for (Pelicula peli : all) {
             System.out.println(peli);
         }
         System.out.println("Pelis listadas: " + all.size());
+    }
+
+    private void anyadirOpcionesMenu(Menu menuOrdenacion) {
+        menuOrdenacion.afegirOpcio("Codi Pelicula");
+        menuOrdenacion.afegirOpcio("Titulo");
+        menuOrdenacion.afegirOpcio("Genero");
+        menuOrdenacion.afegirOpcio("Segundas partes");
     }
     
 }
