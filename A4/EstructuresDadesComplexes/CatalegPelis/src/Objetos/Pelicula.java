@@ -66,7 +66,7 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return  Titol + "  genere " + genere + ", segundaParte=" + segundaParte;
+        return  codiPel + "-" +  Titol + "  genere " + genere + ", segundaParte=" + segundaParte;
     }
 
 

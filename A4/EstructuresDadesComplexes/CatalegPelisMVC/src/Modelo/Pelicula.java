@@ -8,7 +8,7 @@ package Modelo;
  *
  * @author mabardaji
  */
-public class Pelicula {
+public class Pelicula implements Comparable<Pelicula>{
     private int codiPel;
     private String Titol;
     private String genere;
@@ -17,7 +17,7 @@ public class Pelicula {
     public Pelicula(int codiPel, String Titol, String genere, boolean segundaParte) {
         this.codiPel = codiPel;
         this.Titol = Titol;
-        this.genere = genere;
+        this.genere = genere; //
         this.segundaParte = segundaParte;
     }
 
@@ -66,7 +66,8 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return  Titol + "  genere " + genere + ", segundaParte=" + segundaParte;
+        return    codiPel + "-" +  Titol + "  genere " + genere + ", segundaParte=" + segundaParte;
+
     }
 
 
@@ -84,6 +85,12 @@ public class Pelicula {
         }
         final Pelicula other = (Pelicula) obj;
         return this.codiPel == other.codiPel;
+    }
+
+    @Override
+    public int compareTo(Pelicula segunda) {
+        //return this.Titol.compareTo(segunda.Titol); //positivo primero y negativo el segundo es mas grande
+        return this.codiPel - segunda.codiPel; //devuelve la operacion
     }
     
     
