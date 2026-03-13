@@ -8,6 +8,7 @@ import Modelo.InvalidIdPeliculaException;
 import Modelo.Pelicula;
 import Modelo.PeliculaDAO;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -41,6 +42,7 @@ public class CatalegPelisMVC {
             opcio = menuConsola.llegirOpcioValida();
             //int salida = menuConsola.getOpcioSalida();
             switch (opcio) {
+                
                 case 2:
                     System.out.println("Has seleccionat: Afegir Película");
                     // TODO: Implementar afegir pel·lícula
@@ -266,7 +268,7 @@ public class CatalegPelisMVC {
     }
 
     private void llistarPeliculesNombre(PeliculaDAO cataleg) {
-        List<Pelicula> all = cataleg.allPelis();
+        List<Pelicula> all = cataleg.allPelis();        
         Collections.sort(all); //el objeto que contiene el List tiene la interface Comparable implementada
         for (Pelicula peli : all) {
             System.out.println(peli);
