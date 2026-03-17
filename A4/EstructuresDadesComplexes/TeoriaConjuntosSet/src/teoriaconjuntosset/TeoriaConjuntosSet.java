@@ -19,6 +19,7 @@ public class TeoriaConjuntosSet {
      */
     public static void main(String[] args) {
         Set<String> profesores = new HashSet<>(); //no admite duplicados todos los sets
+        //que pel cammp equals no coincideixi
         profesores.add("Roser"); //no importa el orden
         profesores.add("Miquel Angel");
         profesores.add("Isabel");
@@ -71,12 +72,7 @@ public class TeoriaConjuntosSet {
         System.out.println(PelisTerror);
         
         
-        
-        
-        
-        
-        
-        
+
     }
     
 }
