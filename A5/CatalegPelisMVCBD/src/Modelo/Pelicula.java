@@ -12,13 +12,23 @@ public class Pelicula implements Comparable<Pelicula>{
     private int codiPel;
     private String Titol;
     private String genere;
+    private int duracion;
     private boolean segundaParte;
 
-    public Pelicula(int codiPel, String Titol, String genere, boolean segundaParte) {
+    public Pelicula(int codiPel, String Titol, String genere, int duracion, boolean segundaParte) {
         this.codiPel = codiPel;
         this.Titol = Titol;
         this.genere = genere; //
+        this.duracion = duracion;
         this.segundaParte = segundaParte;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
     }
 
     public int getCodiPel() {

@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author mabardaji
  */
-public class PeliculaDAO {
+public class PeliculaDAO implements InterfaceDAO{
     List<Pelicula> cataleg;
 
     public PeliculaDAO() {
@@ -24,14 +24,14 @@ public class PeliculaDAO {
      * para tener datos iniciales
      */
     private void afegirPelisInicials() {
-        addPeli(new Pelicula(1, "Alien", "TERROR", true));
-        addPeli(new Pelicula(34, "Alien", "TERROR", true));
-        addPeli(new Pelicula(14, "Agarralo como puedas 14", "Comica", true));
-        addPeli(new Pelicula(2, "Matrix", "CIENCIA FICCIO", true));
-        addPeli(new Pelicula(3, "Salvar al Soldado Ryan", "WESTERN", false));
-        addPeli(new Pelicula(4, "Top Secret", "Comica", false));
-        addPeli(new Pelicula(4, "Agarralo como puedas", "Comica", true));
-        addPeli(new Pelicula(24, "Alien", "TERROR", true));
+        addPeli(new Pelicula(1, "Alien", "TERROR", 100, true));
+        addPeli(new Pelicula(34, "Alien", "TERROR",100, true));
+        addPeli(new Pelicula(14, "Agarralo como puedas 14", "Comica", 100,true));
+        addPeli(new Pelicula(2, "Matrix", "CIENCIA FICCIO", 100,true));
+        addPeli(new Pelicula(3, "Salvar al Soldado Ryan", "WESTERN",100, false));
+        addPeli(new Pelicula(4, "Top Secret", "Comica", 100,false));
+        addPeli(new Pelicula(4, "Agarralo como puedas", "Comica", 100,true));
+        addPeli(new Pelicula(24, "Alien", "TERROR",100, true));
   
     }
 

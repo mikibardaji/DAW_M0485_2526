@@ -7,6 +7,7 @@ package catalegpelismvc;
 import Modelo.InvalidIdPeliculaException;
 import Modelo.Pelicula;
 import Modelo.PeliculaDAO;
+import Modelo.PeliculaDAOBD;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,10 +29,12 @@ public class CatalegPelisMVC {
                
     }
 
-    private void run() { //main sense public static 
-        PeliculaDAO cataleg;
+    private void run() {
+        try {
+        //main sense public static
+        PeliculaDAOBD cataleg;
         
-        cataleg = new PeliculaDAO(); //inicialitzar ArrayList i afegeix pelis
+        cataleg = new PeliculaDAOBD(); //inicialitzar ArrayList i afegeix pelis
         Menu menuConsola = new Menu("Catalogo de pelis", true);
         anyadirItemsMenu(menuConsola);
         int opcio;
@@ -70,14 +73,14 @@ public class CatalegPelisMVC {
                 case 7:
                     System.out.println("Has seleccionat: Borrar pel·lícula nombre");
                     borrarPeliNombre(cataleg);
-                    break;                    
-
-
+                    break;
+                    
+                    
                 case 8:
                     System.out.println("Has seleccionat: Filtrar por genero");
                     filtrarGenere(cataleg);
-                    break; 
-
+                    break;
+                    
                 case 9:
                     System.out.println("Has seleccionat: Llistar pel·lícules ordenadas por nombre");
                     llistarPeliculesOrdenades(cataleg);
@@ -85,13 +88,17 @@ public class CatalegPelisMVC {
             }
 
             System.out.println();
-
+            
         } while (opcio != menuConsola.getOpcioSalida());   
         
         System.out.println("Sortint del programa...");
+        } //cierre del try que esta en la primera fila try { //cierre del try que esta en la primera fila try {
+        catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
-    private void afegirPeli(PeliculaDAO cataleg) {
+    private void afegirPeli(PeliculaDAOBD cataleg) {
         /*Datos entrada*/
         Scanner sc = new Scanner(System.in);
         System.out.print("Pon el id:");
@@ -106,11 +113,11 @@ public class CatalegPelisMVC {
         Pelicula anyadir;
         if (segunda.equalsIgnoreCase("SI"))
         {
-            anyadir = new Pelicula(id, titulo, genero, true);
+            anyadir = new Pelicula(id, titulo, genero, 100,true);
         }
         else
         {
-            anyadir = new Pelicula(id, titulo, genero, false);
+            anyadir = new Pelicula(id, titulo, genero,100, false);
         }
         /* segunda interaccion con Modelo (DAO)
                 */
@@ -125,12 +132,12 @@ public class CatalegPelisMVC {
         }
     }
 
-    private void buscarPeliId(PeliculaDAO cataleg) {
+    private void buscarPeliId(PeliculaDAOBD cataleg) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Pon id de peli a borrar? ");
         int idPel = sc.nextInt();//campo del equals
         
-        Pelicula fakeSearch = new Pelicula(idPel, "Delete", "TERROR", true);
+        Pelicula fakeSearch = new Pelicula(idPel, "Delete", "TERROR",100, true);
         try {
             //Read (Crud)
             Pelicula find = cataleg.findPeli(fakeSearch);
@@ -154,13 +161,13 @@ public class CatalegPelisMVC {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void borrarPeli(PeliculaDAO cataleg) {
+    private void borrarPeli(PeliculaDAOBD cataleg) {
         /*1 pedir datos entrada*/
         Scanner sc = new Scanner(System.in);
         System.out.println("Pon id de peli a borrar? ");
         int idPel = sc.nextInt();//campo del equals
         
-        Pelicula fakeDelete = new Pelicula(idPel, "Delete", "TERROR", true);
+        Pelicula fakeDelete = new Pelicula(idPel, "Delete", "TERROR", 0,true);
         /*interaccionar modelo CRUDelete*/
         if (cataleg.borrarPelicula(fakeDelete))
         {
@@ -173,15 +180,17 @@ public class CatalegPelisMVC {
         /*salida de datos*/
     }
 
-    private void llistarPelicules(PeliculaDAO cataleg) {
+    private void llistarPelicules(PeliculaDAOBD cataleg) {
         List<Pelicula> all = cataleg.allPelis();
+        //lo mas correcte es que devolviera null si da errores
+        //y con un if indicas que si es null, ha habido error de SQL
         for (Pelicula peli : all) {
             System.out.println(peli);
         }
         System.out.println("Pelis listadas: " + all.size());
     }
 
-    private void borrarPeliNombre(PeliculaDAO cataleg) {
+    private void borrarPeliNombre(PeliculaDAOBD cataleg) {
         /*pedir datos entrada*/
         Scanner sc = new Scanner(System.in);
         System.out.println("Pon titulo peli a borrar? ");
@@ -202,7 +211,7 @@ public class CatalegPelisMVC {
         
     }
 
-    private void filtrarGenere(PeliculaDAO cataleg) {
+    private void filtrarGenere(PeliculaDAOBD cataleg) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Que tipo de genero quieres ver");
         String generoSearch = sc.nextLine();
@@ -228,7 +237,7 @@ public class CatalegPelisMVC {
         
     }
 
-    private void buscarPeliSegundaParte(PeliculaDAO cataleg) {
+    private void buscarPeliSegundaParte(PeliculaDAOBD cataleg) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Quieres pelis con segunda parte(Si/No)");
         String yesNo = sc.nextLine();
@@ -265,7 +274,7 @@ public class CatalegPelisMVC {
         menuConsola.afegirOpcio("Llistar pel·lícules ordenades");
     }
 
-    private void llistarPeliculesOrdenades(PeliculaDAO cataleg) {
+    private void llistarPeliculesOrdenades(PeliculaDAOBD cataleg) {
         List<Pelicula> all = cataleg.allPelis();   
         Menu menuOrdenacion = new Menu("Eleccion orden");
         anyadirOpcionesMenu(menuOrdenacion);
