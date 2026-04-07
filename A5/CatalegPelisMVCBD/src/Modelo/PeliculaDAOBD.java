@@ -27,10 +27,60 @@ public class PeliculaDAOBD implements InterfaceDAO{
     
 
     @Override
-    public boolean addPeli(Pelicula anyadir) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean addPeli(Pelicula anyadir)  {   //throws SQLException (si no fos per la interface)    
+        try {
+        conn = DbConnect.getConnection(); //creo conexion a traves de la cual ejecutare 
+
+        String query = "INSERT INTO movies"
+                + " (Titol, genere,duracion,segundaParte) "
+                + " VALUES (?,?,?,?) ";
+        System.out.println(query);
+        PreparedStatement pstmt = conn.prepareStatement(query); //preparada
+        //PERO NO EXECUTADA 
+        pstmt.setString(1, anyadir.getTitol());
+        pstmt.setString(2, anyadir.getGenere());
+        pstmt.setInt(3, anyadir.getDuracion());
+        pstmt.setBoolean(4, anyadir.getSegundaParte());
+
+        int filas = pstmt.executeUpdate(); //retorna un int
+        //return pstmt.executeUpdate()==1;
+        //return filas == 1;
+        
+        if (filas == 1) return true;
+        else return false; //insert
+        
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage()); //esto no deberia estar aqui            
+            return false;
+        }
     }
 
+    public boolean addPeli2(Pelicula anyadir)  {   //throws SQLException (si no fos per la interface)    
+        //utilizando Statement que es mas SUCIO
+        try {
+        conn = DbConnect.getConnection(); //creo conexion a traves de la cual ejecutare 
+
+        Statement stmt = conn.createStatement();
+        String query = "INSERT INTO "
+                + "movies (Titol,genere,duracion,segundaParte)" +
+                " VALUES ('"+ anyadir.getTitol() + "','"+ 
+                anyadir.getGenere()+ "'," 
+                + anyadir.getDuracion()+ ","
+                + anyadir.getSegundaParte()+ ")";
+        //verificacions
+        System.out.println("Query=" + query);
+        return stmt.execute(query)==false;
+        
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage()); //esto no deberia estar aqui            
+            return false;
+        }
+    }
+    
+    
+    
     /**
      *
      * @return
@@ -46,7 +96,17 @@ public class PeliculaDAOBD implements InterfaceDAO{
             {
                 Statement stmt = conn.createStatement(); // import java.sql.Statement
                 String query = "SELECT * FROM MOVIES"; 
-                ResultSet rs = stmt.executeQuery(query); //resultat es una clase que
+                String querySciFi = "SELECT * FROM MOVIES where genere = 'Sci-Fi'"; 
+                
+                String genere = "Sci-Fi";
+                String querySciFi3 = "SELECT * FROM MOVIES where genere = '" + genere + "'"; 
+                String queryidPel = "SELECT * FROM MOVIES WHERE codiPel > 10";
+                int idPeli = 12;
+                String queryidPelVariable = 
+                        "SELECT * FROM MOVIES WHERE codiPel > " + idPeli + 
+                        " AND genere = '" + genere + "'";
+                System.out.println(queryidPelVariable);
+                ResultSet rs = stmt.executeQuery(queryidPelVariable); //resultat es una clase que
                 //contendra todas las filas
                 //List<Pelicula> all = new ArrayList<>();
                 while(rs.next()) //si da true es que hay una siguiente

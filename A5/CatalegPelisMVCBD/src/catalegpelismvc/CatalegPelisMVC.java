@@ -99,7 +99,7 @@ public class CatalegPelisMVC {
         }
     }
 
-    private void afegirPeli(PeliculaDAOBD cataleg) {
+    private void afegirPeli(PeliculaDAOBD cataleg) { //VISTAAAAAAAAAAAA
         /*Datos entrada*/
         Scanner sc = new Scanner(System.in);
         System.out.print("Pon el id:");
@@ -109,16 +109,19 @@ public class CatalegPelisMVC {
         String titulo = sc.nextLine();
         System.out.print("Pon el genere:");
         String genero = sc.nextLine();
+        System.out.print("Pon la duracion pelicula:");
+        int duracion = sc.nextInt();
+        sc.nextLine();
         System.out.print("Tiene segunda parte?:");
         String segunda = sc.nextLine();
         Pelicula anyadir;
         if (segunda.equalsIgnoreCase("SI"))
         {
-            anyadir = new Pelicula(id, titulo, genero, 100,true);
+            anyadir = new Pelicula(id, titulo, genero, duracion,true);
         }
         else
         {
-            anyadir = new Pelicula(id, titulo, genero,100, false);
+            anyadir = new Pelicula(id, titulo, genero,duracion, false);
         }
         /* segunda interaccion con Modelo (DAO)
                 */
