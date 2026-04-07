@@ -10,6 +10,7 @@ import Modelo.PeliculaDAO;
 import Modelo.PeliculaDAOBD;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import utilitats.Menu;
@@ -33,7 +34,7 @@ public class CatalegPelisMVC {
         try {
         //main sense public static
         PeliculaDAOBD cataleg;
-        
+            //InputMismatchException
         cataleg = new PeliculaDAOBD(); //inicialitzar ArrayList i afegeix pelis
         Menu menuConsola = new Menu("Catalogo de pelis", true);
         anyadirItemsMenu(menuConsola);
