@@ -45,7 +45,10 @@ public class PeliculaDAOBD implements InterfaceDAO{
         int filas = pstmt.executeUpdate(); //retorna un int
         //return pstmt.executeUpdate()==1;
         //return filas == 1;
-        
+        //la variable filas es la que em diu quantes
+        //files s'han vist afectades , podria ser més d'una (UPDATE/DELETE)
+        // o fins i tot 0... 
+        // i si es 0 potser també es correcte, 
         if (filas == 1) return true;
         else return false; //insert
         
@@ -70,6 +73,7 @@ public class PeliculaDAOBD implements InterfaceDAO{
                 + anyadir.getSegundaParte()+ ")";
         //verificacions
         System.out.println("Query=" + query);
+        
         return stmt.execute(query)==false;
         
         
@@ -101,7 +105,7 @@ public class PeliculaDAOBD implements InterfaceDAO{
                 String genere = "Sci-Fi";
                 String querySciFi3 = "SELECT * FROM MOVIES where genere = '" + genere + "'"; 
                 String queryidPel = "SELECT * FROM MOVIES WHERE codiPel > 10";
-                int idPeli = 12;
+                int idPeli = 1;
                 String queryidPelVariable = 
                         "SELECT * FROM MOVIES WHERE codiPel > " + idPeli + 
                         " AND genere = '" + genere + "'";
@@ -161,5 +165,40 @@ public class PeliculaDAOBD implements InterfaceDAO{
     public int borrarPeliculasNombre(String tituloDelete) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public int updateTitulo(Pelicula fakeUpdate) throws SQLException {
+        conn = DbConnect.getConnection();
+        
+        String query = "UPDATE MOVIES "
+                + " SET Titol=? "
+                + " where codiPel=? ";
+       // System.out.println(query);
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, fakeUpdate.getTitol());
+        pstmt.setInt(2, fakeUpdate.getCodiPel());
+        
+        int filasAfectadas = pstmt.executeUpdate();
+        
+        return filasAfectadas; //podria ser en aquest cas true o false
+        
+    }
+    /*
+     try {
+        conn = DbConnect.getConnection(); //creo conexion a traves de la cual ejecutare 
+
+        String query = "INSERT INTO movies"
+                + " (, genere,duracion,segundaParte) "
+                + " VALUES (?,?,?,?) ";
+        System.out.println(query);
+        PreparedStatement pstmt = conn.prepareStatement(query); //preparada
+        //PERO NO EXECUTADA 
+        pstmt.setString(1, anyadir.getTitol());
+        pstmt.setString(2, anyadir.getGenere());
+        pstmt.setInt(3, anyadir.getDuracion());
+        pstmt.setBoolean(4, anyadir.getSegundaParte());
+
+        int filas = pstmt.executeUpdate(); //retorna un in
+    */
+
     
 }

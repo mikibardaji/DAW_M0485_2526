@@ -8,11 +8,14 @@ import Modelo.InvalidIdPeliculaException;
 import Modelo.Pelicula;
 import Modelo.PeliculaDAO;
 import Modelo.PeliculaDAOBD;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utilitats.Menu;
 
 /**
@@ -21,6 +24,7 @@ import utilitats.Menu;
  */
 public class CatalegPelisMVC {
 
+    Scanner sc = new Scanner(System.in);
     /**
      * @param args the command line arguments
      */
@@ -86,6 +90,10 @@ public class CatalegPelisMVC {
                     System.out.println("Has seleccionat: Llistar pel·lícules ordenadas por nombre");
                     llistarPeliculesOrdenades(cataleg);
                     break;                    
+                case 10:
+                    System.out.println("Has seleccionat: actualizar nombre peli");
+                    CambiarNombrePelicula(cataleg);
+                    break;                     
             }
 
             System.out.println();
@@ -242,7 +250,7 @@ public class CatalegPelisMVC {
     }
 
     private void buscarPeliSegundaParte(PeliculaDAOBD cataleg) {
-        Scanner sc = new Scanner(System.in);
+
         System.out.println("Quieres pelis con segunda parte(Si/No)");
         String yesNo = sc.nextLine();
         boolean segunda;
@@ -276,6 +284,7 @@ public class CatalegPelisMVC {
         menuConsola.afegirOpcio("Filtrar por Genero");
         menuConsola.afegirOpcio("Afegir Pel·lícula");
         menuConsola.afegirOpcio("Llistar pel·lícules ordenades");
+        menuConsola.afegirOpcio("Canviar Titulo a peli (id)(PreparedStatement)");
     }
 
     private void llistarPeliculesOrdenades(PeliculaDAOBD cataleg) {
@@ -314,6 +323,32 @@ public class CatalegPelisMVC {
         menuOrdenacion.afegirOpcio("Titulo");
         menuOrdenacion.afegirOpcio("Genero");
         menuOrdenacion.afegirOpcio("Segundas partes");
+    }
+
+    private void CambiarNombrePelicula(PeliculaDAOBD cataleg) {
+        try {
+            System.out.println("Pon el id de la pelicula a cambiar");
+            int codiPelChange = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Pon el nuevo titulo");
+            String nuevoTitulo = sc.nextLine();
+            
+            //le puedo pasar los dos valores por parametro //solucion correcta
+            Pelicula fakeUpdate = new Pelicula(codiPelChange, nuevoTitulo, "", 0, true);
+            int filas = cataleg.updateTitulo(fakeUpdate); //me queda decidir que valor devuelve
+            if (filas==0)
+            {
+                System.err.println("No hay ninguna peli con id " + codiPelChange);
+            }
+            else //se que sera 1
+            {
+                System.out.println("Cambiado a nuevo titulo ");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Error construyendo sql");
+        }
+        
     }
     
 }
