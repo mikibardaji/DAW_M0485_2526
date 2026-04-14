@@ -56,7 +56,18 @@ public class Coche {
 
     @Override
     public String toString() {
-        return "El coche con la matricula. " + matricula + " es un " + marca + " con " + puertas + " puertas y automatico?" + automatico;
+        String finalFrase;
+        if (automatico)
+        {
+            finalFrase = " es automatico";
+        }
+        else
+        {
+            finalFrase = " no es automatico";
+        }
+        
+        return "El coche con la matricula. " + matricula + " es un " + marca + " con " + puertas + " puertas y " + finalFrase;
+        
     }
 
 
