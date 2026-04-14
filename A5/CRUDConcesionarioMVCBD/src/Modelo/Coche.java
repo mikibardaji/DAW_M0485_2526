@@ -66,7 +66,8 @@ public class Coche {
             finalFrase = " no es automatico";
         }
         
-        return "El coche con la matricula. " + matricula + " es un " + marca + " con " + puertas + " puertas y " + finalFrase;
+        return "El coche con la matricula. " + matricula + " es un " + marca + " con " 
+                + puertas + " puertas y " + finalFrase;
         
     }
 
