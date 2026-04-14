@@ -117,4 +117,55 @@ public class VistaConsolaConcesionario {
              System.err.println(ex.getMessage());
         }
     }
+    
+    
+    private void modificarCoches(CocheDAODB modelo) {
+        Scanner sc = new Scanner(System.in);
+           
+            System.out.println("INTRODUCE DATOS DE COCHE QUE QUIERE MODIFICAR ");
+           
+            System.out.println("introduce el numero de matricula ");
+            String mat = sc.nextLine();
+           
+            if (mat.length()== 7) {
+ 
+            try {
+                System.out.println("introduce la nueva marca ");
+                String mar = sc.nextLine();
+               
+                System.out.println("introduce cuantas puertas tiene ");
+                int puer = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Es automatico? ");
+                String respuesta = sc.nextLine();
+               
+                boolean aut;
+                if (respuesta.equalsIgnoreCase("si")) {
+                    aut = true;
+                   
+                } else {
+                    aut = false;
+                }
+                Coche cochesModificar = new Coche(mat, mar, puer, aut);
+               
+                int update = modelo.modificarCar(cochesModificar);
+               
+                if (update == 0) {
+                    System.err.println("no existe la matricula "+mat);
+                 
+                }else{
+                    System.out.println("se han actualizado " + update + " coche");
+                }
+               
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+                   
+                   
+            }else{
+                System.err.println("la matricula tiene que ser de 7 ");
+            }
+       
+    }
+    
 }

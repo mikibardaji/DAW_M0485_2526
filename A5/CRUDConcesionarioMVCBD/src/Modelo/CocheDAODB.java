@@ -70,4 +70,55 @@ public class CocheDAODB {
         }  
         
     }
+    
+    
+    public int modificarCar(Coche cochesModificar) throws SQLException {
+        conn = DbConnect.getConnection();
+     
+        //verificar que exista
+        boolean existe = existeCocheMatricula(cochesModificar.getMatricula());
+       
+        if (existe==true)
+        {
+                String queryDos ="UPDATE coches SET marca = ?    "
+                        + ", puertas = ? "
+                        + ", automatico = ?"
+                        + " WHERE matricula = ?";
+
+                //System.out.println(queryDos);
+                PreparedStatement pepe = conn.prepareStatement(queryDos);
+                pepe.setString(1, cochesModificar.getMarca());
+                pepe.setInt(2,cochesModificar.getPuertas());
+                pepe.setBoolean(3,cochesModificar.isAutomatico());
+                pepe.setString(4,cochesModificar.getMatricula());
+
+                int mod = pepe.executeUpdate();
+
+                pepe.close();
+                conn.close();
+                return mod;
+        }
+        else
+        {
+            return 0; //no existe la matricula
+        }
+    }
+
+    private boolean existeCocheMatricula(String matricula) throws SQLException {
+        conn = DbConnect.getConnection();
+       
+        String query = "SELECT COUNT(*) AS 'Numero' FROM coches where matricula = ?";
+        PreparedStatement pepe = conn.prepareStatement(query);
+        pepe.setString(1, matricula);
+        ResultSet rs  = pepe.executeQuery();
+        int numero = 0;
+        if (rs.next())
+        {
+            numero = rs.getInt("Numero");
+        }
+       
+        return numero == 1; //si ha dado 1 es que existe sino false
+    }
+    
+    
 }
