@@ -121,4 +121,53 @@ public class CocheDAODB {
     }
     
     
+    public int eliminarCoche(Coche eliminarCoche) throws SQLException {
+        conn = DbConnect.getConnection();    
+        String query = "DELETE FROM Coches WHERE puertas =?";
+        PreparedStatement fernando = conn.prepareStatement(query);
+        fernando.setInt(1, eliminarCoche.getPuertas());
+        int cochePuertas = fernando.executeUpdate();
+        fernando.close();
+        conn.close();
+        return cochePuertas;
+    }
+
+    public Coche consultaCocheMatricula(String mat) throws SQLException {
+         conn = DbConnect.getConnection();   
+         if (conn==null)
+         {
+             return null;
+         }
+         else
+         {
+            String query = "SELECT * FROM Coches WHERE MATRICULA = ?";
+            PreparedStatement fernando = conn.prepareStatement(query);
+            //INFORMO INTERROGANTES
+            fernando.setString(1, mat);
+            ResultSet cursor = fernando.executeQuery();
+            if (cursor.next())
+            {
+                   String matricula = cursor.getString("matricula");
+                   String marca = cursor.getString("marca");
+                   int puertas = cursor.getInt("puertas");
+                   boolean automatico = cursor.getBoolean("automatico");
+                   Coche encontrado = new Coche(matricula, marca, puertas, automatico);
+                   cursor.close();
+                   fernando.close();
+                   conn.close();
+                   return encontrado;
+            }
+            else
+            {
+                 cursor.close();
+                 fernando.close();
+                 conn.close();
+                return null; //que sera la manera para avisar que no hay datos
+            }
+         }
+         
+         
+    }
+    
+    
 }

@@ -46,6 +46,14 @@ public class VistaConsolaConcesionario {
                         System.out.println("Listar");
                         listarCochesito(modelo);
                         break;
+                    case 3:
+                        System.out.println("Vender");
+                        deleteCoche(modelo);
+                        break;
+                    case 4:
+                        System.out.println("Consultar");
+                        consultaCoche(modelo);
+                        break;
                     default:
                         if (opcion == menuConcesionario.getOpcioSalida()) {
                           System.out.println("Salir");  
@@ -70,8 +78,10 @@ public class VistaConsolaConcesionario {
     private void anyadirOpcionesMenu(Menu menuLuchador) {
         menuLuchador.afegirOpcio("Alta Coche");
         menuLuchador.afegirOpcio("Listar todos Coches");
+        menuLuchador.afegirOpcio("Vender Coche");
+        menuLuchador.afegirOpcio("Consultar Coche");
         menuLuchador.afegirOpcio("Salir");
-        menuLuchador.setOpcioSalida(3); //salida
+        menuLuchador.setOpcioSalida(5); //salida
     }
 
     private void listarCochesito(CocheDAODB modelo) {
@@ -166,6 +176,45 @@ public class VistaConsolaConcesionario {
                 System.err.println("la matricula tiene que ser de 7 ");
             }
        
+    }
+    
+    
+    private void deleteCoche(CocheDAODB modelo){
+        try {
+            System.out.println("De cuantas puertas quieres eliminar los coches");
+            int puerta = sc.nextInt();
+            sc.nextLine();
+            Coche eliminarCoche = new Coche(" ", " ", puerta, true);
+            int cochePuertas = modelo.eliminarCoche(eliminarCoche);
+            if (cochePuertas == 0) {
+                System.err.println("ERROR, no existe esas puertas");
+            }else{
+                System.out.println("Se ha eliminado " + cochePuertas + " coches");
+            }
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    private void consultaCoche(CocheDAODB modelo) {
+        try {
+            System.out.println("introduce el numero de matricula a buscar ");
+            String mat = sc.nextLine();
+            
+            Coche buscado = modelo.consultaCocheMatricula(mat);
+            if (buscado!=null)
+            {
+                System.out.println("Encontrado coche!");
+                System.out.println(buscado);
+            }
+            else
+            {
+                System.out.println("No existe coche con la matricula" + buscado);
+            }
+        } catch (SQLException ex) {
+             System.err.println(ex.getMessage());
+        }
     }
     
 }
