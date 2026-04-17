@@ -33,7 +33,6 @@ public class VistaConsolaConcesionario {
             do {
                 menuConcesionario.mostrarMenu();
                 
-                boolean valorEntero = false;
                 
                 opcion = menuConcesionario.llegirOpcioValida();
                 
@@ -210,7 +209,7 @@ public class VistaConsolaConcesionario {
             }
             else
             {
-                System.out.println("No existe coche con la matricula" + buscado);
+                System.err.println("No existe coche con la matricula " + mat);
             }
         } catch (SQLException ex) {
              System.err.println(ex.getMessage());
