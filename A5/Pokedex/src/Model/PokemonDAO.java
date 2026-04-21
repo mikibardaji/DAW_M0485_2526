@@ -45,12 +45,12 @@ public class PokemonDAO {
     public List<Pokemon> llistarTots() throws SQLException {
         List<Pokemon> llista = new ArrayList<>();
         String sql = "SELECT * FROM pokemons";
-        try (Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        Statement st = conn.createStatement(); 
+        ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 llista.add(new Pokemon(rs.getInt("id"), rs.getString("nom"), 
                            rs.getString("tipus"), rs.getInt("nivell"), rs.getInt("capturats")));
             }
-        }
         return llista;
     }
 

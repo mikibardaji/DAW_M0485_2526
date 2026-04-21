@@ -36,9 +36,7 @@ public class EvolucioDAO {
                 return rs.getString("pokemon_evolucionat");
             }
 
-        } catch (SQLException e) {
-            System.out.println("Error al consultar evolució: " + e.getMessage());
-        }
+        } 
 
         return null; // no té evolució
     }

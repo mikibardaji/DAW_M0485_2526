@@ -54,9 +54,12 @@ public class VistaConsola {
             String nom = sc.nextLine();
             Pokemon p = dao.buscarPerNom(nom);
             if (p == null) {
-                System.out.print("ID Pokedex: "); int id = Integer.parseInt(sc.nextLine());
-                System.out.print("Tipus: "); String tipus = sc.nextLine();
-                System.out.print("Nivell: "); int nivell = Integer.parseInt(sc.nextLine());
+                System.out.print("ID Pokedex: "); 
+                int id = Integer.parseInt(sc.nextLine());
+                System.out.print("Tipus: "); 
+                String tipus = sc.nextLine();
+                System.out.print("Nivell: "); 
+                int nivell = Integer.parseInt(sc.nextLine());
                 p = new Pokemon(id, nom, tipus, nivell, 1);
                 int insert = dao.capturar(p);
                 if (insert>0)
@@ -69,8 +72,8 @@ public class VistaConsola {
                 }
             }
             else
-            {//si existia fare update
-                int update = dao.actualitzatCapturats(nom);
+            {//si existia fare update actualitzant a 1 més els capturarts
+                int update = dao.actualitzarCapturats(nom, 1);
                 if (update>0)
                 {
                    System.out.println("Ja tenies el pokemon ara en tens un de més"); 
@@ -92,7 +95,8 @@ public class VistaConsola {
                     System.out.println(tot);
             }
             System.out.println("Mostrats: " + llista.size());
-        } catch (Exception e) { System.out.println("Error: " + e.getMessage()); }
+        } catch (SQLException e) 
+        { System.out.println("Error: " + e.getMessage()); }
     }
 
     private void menuEvolucionar(PokemonDAO dao) {

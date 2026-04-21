@@ -22,14 +22,17 @@ public class PokemonDAO {
 
     public int capturar(Pokemon p) throws SQLException {
         
-
-            String sql = "INSERT INTO pokemons (id, nom, tipus, nivell, capturats) VALUES (?, ?, ?, ?, 1)";
+                //conn = DbConnect.getConnection();
+                String sql = "INSERT INTO pokemons " +
+                        " (id, nom, tipus, nivell, capturats) " +
+                        " VALUES (?, ?, ?, ?, ?)";
 
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, p.getId());
                 ps.setString(2, p.getNom());
                 ps.setString(3, p.getTipus());
                 ps.setInt(4, p.getNivell());
+                ps.setInt(5, p.getCapturats());
                 return ps.executeUpdate();
 
         }
@@ -56,12 +59,11 @@ public class PokemonDAO {
         String sql = "SELECT * FROM pokemons WHERE UPPER(nom) = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nom.toUpperCase());
-            try (ResultSet rs = ps.executeQuery()) {
+            ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     return new Pokemon(rs.getInt("id"), rs.getString("nom"), 
                                rs.getString("tipus"), rs.getInt("nivell"), rs.getInt("capturats"));
                 }
-            }
         
         return null;
     }
@@ -79,53 +81,52 @@ public class PokemonDAO {
 
     public boolean evolucionar(String nomBase, int quantitat) throws SQLException {
         String nomEvolucio = evolucioDAO.obtenirEvolucio(nomBase);
-        if (nomEvolucio == null) throw new SQLException("Aquest Pokémon no té evolució registrada.");
+        if (nomEvolucio == null) 
+            throw new SQLException("Aquest Pokémon no té evolució registrada.");
 
         Pokemon base = buscarPerNom(nomBase);
-        if (base == null || base.getCapturats() < quantitat) 
+        if (base == null || 
+                base.getCapturats() < quantitat) 
             throw new SQLException("No tens prou exemplars de " + nomBase);
 
-        // 1. Restar al base
-        String sqlUpdateBase = "UPDATE pokemons " +
-                               " SET capturats = capturats - ? " +
-                               " WHERE nom = ?";
-        PreparedStatement ps = conn.prepareStatement(sqlUpdateBase);
-            ps.setInt(1, quantitat);
-            ps.setString(2, nomBase);
-            ps.executeUpdate();
+        // 1. Restar al base la quantitat
+        int update1 = actualitzarCapturats(nomBase, (-1) * quantitat);
         
 
         // 2. Sumar o insertar l'evolucionat
         Pokemon evolucio = buscarPerNom(nomEvolucio);
         if (evolucio != null) {
-            String sqlUpdateEvo = "UPDATE pokemons SET capturats = capturats + ? WHERE nom = ?";
-            PreparedStatement ps1 = conn.prepareStatement(sqlUpdateEvo);
-                ps1.setInt(1, quantitat);
-                ps1.setString(2, nomEvolucio);
-                ps1.executeUpdate();
-                return true; //true voldra dir que ja el tenies i estar actualitzar
+            int update = actualitzarCapturats(nomEvolucio, quantitat);
+            return true; //true voldra dir que ja el tenies i estar actualitzar
             }
          else {
-            // Si no existeix a la motxilla, l'insertem (id i dades inventades o per defecte segons l'enunciat)
-            String sqlInsertEvo = "INSERT INTO pokemons (id, nom, tipus, nivell, capturats) VALUES (?, ?, ?, ?, ?)";
-            //haaig de buscar el següent id per poder insertar-lo
-            int maximId = buscarIdMaxim();
-            PreparedStatement ps2 = conn.prepareStatement(sqlInsertEvo);
-                ps2.setInt(1, maximId + 1); // ID aproximat
-                ps2.setString(2, nomEvolucio);
-                ps2.setString(3, base.getTipus());
-                ps2.setInt(4, base.getNivell() + 5);
-                ps2.setInt(5, quantitat);
-                ps2.executeUpdate();
+            
+            int maximId = buscarIdMaxim(); //al no existir busco id lliure
+            Pokemon nou = new Pokemon(maximId+1, nomEvolucio, base.getTipus(), base.getNivell(), quantitat);
+            //reutilitzo metodes que ja tinc
+            capturar(nou);
+            
                 return false; //es final correcte però vol dir que es
                 //el primer que tens
             }
         }
 
-    public int actualitzatCapturats(String nom) throws SQLException {
-            String sql = "UPDATE pokemons SET capturats = capturats + 1 WHERE nom = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, nom);
-            return ps.executeUpdate();
+//    public int actualitzatCapturats(String nom) throws SQLException {
+//            String sql = "UPDATE pokemons " 
+//                    + " SET capturats = capturats + 1 " + 
+//                    " WHERE nom = ?";
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//            ps.setString(1, nom);
+//            return ps.executeUpdate();
+//    }
+
+    public int actualitzarCapturats(String nomEvolucio, int quantitat) throws SQLException {
+        String sqlUpdateEvo = "UPDATE pokemons " 
+                    + " SET capturats = capturats + ? " 
+                    + " WHERE nom = ?";
+            PreparedStatement ps1 = conn.prepareStatement(sqlUpdateEvo);
+                ps1.setInt(1, quantitat);
+                ps1.setString(2, nomEvolucio);
+               return  ps1.executeUpdate();
     }
 }

@@ -9,8 +9,6 @@ import Modelo.CocheDAODB;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +22,7 @@ public class VistaConsolaConcesionario {
     {   
         try {
             CocheDAODB modelo = new CocheDAODB();
+            System.out.println("");
             
             /* Crear una variable pel model de dades*/
             //LuchadorDAOList repositori = new LuchadorDAOList();

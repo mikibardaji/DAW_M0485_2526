@@ -17,11 +17,15 @@ public class VistaConsola {
     public void run() {
         try {
             PokemonDAO dao = new PokemonDAO();
+            Menu menuConcesionario = new Menu("\n--- MENÚ POKÉMON ---");
+            anyadirOpcionesMenu(menuConcesionario);
             int opcio;
             do {
-                System.out.println("\n--- MENÚ POKÉMON ---");
-                System.out.println("1. Capturar Pokémon\n2. Llistar Pokémon\n3. Evolucionar\n4. Cercar per nom\n0. Sortir");
-                opcio = Integer.parseInt(sc.nextLine());
+                menuConcesionario.mostrarMenu();
+                
+                
+                opcio = menuConcesionario.llegirOpcioValida();
+                
 
                 switch (opcio) {
                     case 1 :
@@ -36,8 +40,16 @@ public class VistaConsola {
                     case 4:
                         menuCercar(dao);
                         break;
+                    default:
+                        if (opcio == menuConcesionario.getOpcioSalida()) {
+                          System.out.println("Salir");  
+                        } else{
+                          System.out.println("opcion incorrecta");
+                        }
+                       
+                        break;                        
                 }
-            } while (opcio != 0);
+            } while (opcio != menuConcesionario.getOpcioSalida());
         } catch (SQLException e) {
             System.out.println("ERROR CRÍTIC: " + e.getMessage());
         } catch (ClassNotFoundException ex) {
@@ -98,5 +110,14 @@ public class VistaConsola {
             }
             System.out.println("Mostrats: " + cont);
         } catch (Exception e) { System.out.println("Error: " + e.getMessage()); }
+    }
+
+    private void anyadirOpcionesMenu(Menu men) {
+        men.afegirOpcio("Capturar Pokémon");
+        men.afegirOpcio("Llistar Pokémon");
+        men.afegirOpcio("Evolucionar");
+        men.afegirOpcio("Cercar per nom");
+        men.afegirOpcio("Sortir");
+        men.setOpcioSalida(5);
     }
 }
