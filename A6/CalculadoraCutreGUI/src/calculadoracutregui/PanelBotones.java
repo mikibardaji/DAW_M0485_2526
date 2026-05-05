@@ -13,10 +13,10 @@ import javax.swing.SwingConstants;
  * @author mabardaji
  */
 public class PanelBotones extends JPanel{
-    JButton add;
-    JButton minus;
-    JButton multiply;
-    JButton divide;
+    private JButton add;
+    private JButton minus;
+    private JButton multiply;
+    private JButton divide;
 
     public PanelBotones() {
         initComponents(); //ficar els components al layout
@@ -46,6 +46,24 @@ public class PanelBotones extends JPanel{
         multiply.setText("X");
         divide.setText("/");
     }
+
+    public JButton getAdd() {
+        return add;
+    }
+
+    public JButton getMinus() {
+        return minus;
+    }
+
+    public JButton getMultiply() {
+        return multiply;
+    }
+
+    public JButton getDivide() {
+        return divide;
+    }
+    
+    
 
 }
 

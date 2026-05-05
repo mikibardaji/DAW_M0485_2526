@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 public class PanelDatosEntrada extends JPanel{
 
     //components que pueden cambiar de forma o el raton puede interaccionar con ellos
-    JTextField oper1;
-    JTextField oper2;
-    JLabel resultado;
+    private JTextField oper1;
+    private JTextField oper2;
+    private JLabel resultado;
     
     public PanelDatosEntrada() {
         initComponents();
@@ -48,6 +48,18 @@ public class PanelDatosEntrada extends JPanel{
         oper1.setText("00");
         oper2.setText("00");
         resultado.setText("?????");
+    }
+
+    public JTextField getOper1() {
+        return oper1;
+    }
+
+    public JTextField getOper2() {
+        return oper2;
+    }
+
+    public JLabel getResultado() {
+        return resultado;
     }
     
     
