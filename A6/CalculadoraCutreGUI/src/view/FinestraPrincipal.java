@@ -192,7 +192,7 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(null, //null ventana centrada en pantalla
                     ex.getMessage(),  //mensaje que saldra en el cuadro
                     "Error", 
-                    JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.ERROR);
         }
     }
     
