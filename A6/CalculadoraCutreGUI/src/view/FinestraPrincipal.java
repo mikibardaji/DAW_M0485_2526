@@ -50,7 +50,9 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         initMenu();
         //layout del contenedor
         initContainer();
-        initListeners();
+        initListeners(); //solo los del menu los 
+        //de los paneles en cada panel
+        //listeners de todo
         
     }
 
@@ -109,7 +111,10 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
                 break;       
             case "chorra":
                 cargarPanelChorra();
-                break;                 
+                break;    
+            case "botonchorra":
+                JOptionPane.showMessageDialog(null,"A casa","FINAL",JOptionPane.INFORMATION_MESSAGE);
+                break;
         }
         
     }
@@ -119,20 +124,6 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
     que me interesan que reaccionen a eventos del raton/teclado
     */
     private void initListeners() {
-        //comand que es un string para reconocer el componente
-        //el string es libre
-        botones.getAdd().setActionCommand("suma");
-        //IMPORTANTE, PONERLE EL LISTENER
-        botones.getAdd().addActionListener(escuchadorAcciones);
-        
-        botones.getMinus().setActionCommand("resta");
-        botones.getMinus().addActionListener(escuchadorAcciones);
-        
-        botones.getMultiply().setActionCommand("multiplicar");
-        botones.getMultiply().addActionListener(escuchadorAcciones);
-        
-        botones.getDivide().setActionCommand("dividir");
-        botones.getDivide().addActionListener(escuchadorAcciones);
         
         //listeners
         salir.setActionCommand("exit");
@@ -250,6 +241,9 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         botones = new PanelBotones();
         botones.setPreferredSize(new Dimension(0, 100));
         principal.add(botones,BorderLayout.SOUTH);
+        initListenersCalculo(); //porque al cargarlos de nuevo
+        //se tienen que recargar los listeners
+        
         principal.revalidate();
         principal.repaint();
     }
@@ -266,10 +260,33 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         //declaro un panel
         chorra1 = new ChorraPanel();
         principal.add(chorra1);
-
-
+        initListenersChorra();//porque al cargarlos de nuevo
+        //se tienen que recargar los listeners
         principal.revalidate();
         principal.repaint();
+    }
+
+    private void initListenersCalculo() {
+                //comand que es un string para reconocer el componente
+        //el string es libre
+        botones.getAdd().setActionCommand("suma");
+        //IMPORTANTE, PONERLE EL LISTENER
+        botones.getAdd().addActionListener(escuchadorAcciones);
+        
+        botones.getMinus().setActionCommand("resta");
+        botones.getMinus().addActionListener(escuchadorAcciones);
+        
+        botones.getMultiply().setActionCommand("multiplicar");
+        botones.getMultiply().addActionListener(escuchadorAcciones);
+        
+        botones.getDivide().setActionCommand("dividir");
+        botones.getDivide().addActionListener(escuchadorAcciones);
+
+    }
+
+    private void initListenersChorra() {
+        chorra1.getBoton().setActionCommand("botonchorra");
+        chorra1.getBoton().addActionListener(escuchadorAcciones);
     }
     
     
