@@ -5,14 +5,16 @@
 package view;
 
 import Modelo.OperadorDAO;
-import calculadoracutregui.PanelBotones;
-import calculadoracutregui.PanelDatosEntrada;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,9 +25,20 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
 
     PanelDatosEntrada datos; //siguin globals i a tots els metodes 
     PanelBotones botones; //els pugui referenciar
+    ChorraPanel chorra1;
     ActionListener escuchadorAcciones; //aquest
     //al ser Ci V junt fiquem el dao
     OperadorDAO dao; //dao es null
+    //Barra de menu
+    JMenuBar barra;
+    //Menu cada opcion
+    JMenu Opcion1;
+    JMenu Opcion2;
+    //Cada item dentro de la opcion
+    JMenuItem calc;
+    JMenuItem chorra;
+    JMenuItem salir;
+    
     
     public FinestraPrincipal()  {
         dao = new OperadorDAO(); //inicialitzo dao
@@ -34,7 +47,7 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         //inicializar comportamiento Ventana
         initComponentsTitle();
         //initMenu IMPORTANTE
-        
+        initMenu();
         //layout del contenedor
         initContainer();
         initListeners();
@@ -56,20 +69,9 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
 
     private void initContainer() {
         //disposicion componentes/Layout
-        Container principal = this.getContentPane();
-        principal.setLayout(new BorderLayout());
-        //principal.setLayout(new GridLayout(1, 1));
-        //declaro un panel
-        datos = new PanelDatosEntrada();
-        principal.add(datos,BorderLayout.CENTER);
-        //principal.add(datos);
-        //declaro el segundo panel
-        botones = new PanelBotones();
-        botones.setPreferredSize(new Dimension(0, 100));
-        principal.add(botones,BorderLayout.SOUTH);
-        //principal.add(botones);
-        //PanelBotones botones2 = new PanelBotones();
-        //principal.add(botones2);
+        cargarPanelCalculo();
+
+
     }
 
     /*es crida quant hi ha alguna accio dins el Jframe
@@ -83,6 +85,7 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         
         //la parte de menu que hemos hecho hasta la A5
         String accionRealizar = e.getActionCommand();
+        System.out.println(accionRealizar);
         //menu de antes
         switch(accionRealizar)
         {
@@ -98,10 +101,16 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
             case "dividir":
                 accionDividir();
                 break;                
+            case "exit":
+                salir();
+                break;                
+            case "calculo":
+                cargarPanelCalculo();
+                break;       
+            case "chorra":
+                cargarPanelChorra();
+                break;                 
         }
-        
-        
-        
         
     }
 
@@ -125,6 +134,15 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         botones.getDivide().setActionCommand("dividir");
         botones.getDivide().addActionListener(escuchadorAcciones);
         
+        //listeners
+        salir.setActionCommand("exit");
+        salir.addActionListener(escuchadorAcciones);
+        
+        chorra.setActionCommand("chorra");
+        chorra.addActionListener(escuchadorAcciones);
+        
+        calc.setActionCommand("calculo");
+        calc.addActionListener(escuchadorAcciones);
         
     }
 
@@ -194,6 +212,64 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
                     "Error", 
                     JOptionPane.ERROR);
         }
+    }
+
+    private void initMenu() {
+        //declaracion del menu
+        barra = new JMenuBar();
+        Opcion1 = new JMenu("Opciones");
+        Opcion2 = new JMenu("Otro");
+        
+        calc = new JMenuItem("calculo");
+        chorra = new JMenuItem("PanelChorra");
+        salir = new JMenuItem("salir");
+        //los tengo que ir ligando
+        //JmenuItem -> Jmenu
+        Opcion1.add(calc);
+        Opcion1.add(chorra);
+        Opcion1.add(salir);
+        //Jmenu a JMenuBar
+        barra.add(Opcion1);
+        barra.add(Opcion2);
+        
+        this.setJMenuBar(barra);
+        //listener aqui
+        
+    }
+
+    private void cargarPanelCalculo() {
+        Container principal = this.getContentPane();
+        principal.removeAll(); //borrar todo lo que haya
+        principal.setLayout(new BorderLayout());
+        //principal.setLayout(new GridLayout(1, 1));
+        //declaro un panel
+        datos = new PanelDatosEntrada();
+        principal.add(datos,BorderLayout.CENTER);
+
+        //declaro el segundo panel
+        botones = new PanelBotones();
+        botones.setPreferredSize(new Dimension(0, 100));
+        principal.add(botones,BorderLayout.SOUTH);
+        principal.revalidate();
+        principal.repaint();
+    }
+
+    private void salir() {
+        System.exit(0);
+    }
+
+    private void cargarPanelChorra() {
+        Container principal = this.getContentPane();
+        principal.removeAll(); //borrar todo lo que haya
+        principal.setLayout(new FlowLayout());
+        //principal.setLayout(new GridLayout(1, 1));
+        //declaro un panel
+        chorra1 = new ChorraPanel();
+        principal.add(chorra1);
+
+
+        principal.revalidate();
+        principal.repaint();
     }
     
     

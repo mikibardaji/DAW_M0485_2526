@@ -51,9 +51,12 @@ public class FinestraPrincipal extends JFrame implements ActionListener
 
     private void initContainer() {
         Container principal = this.getContentPane();
+        principal.removeAll();//borro lo que haya
         principal.setLayout(new GridLayout(1,1)); //podria ser grid 1,1 o borderLayout (center)
         euroPanel = new PanelEuros();
         principal.add(euroPanel);
+        principal.revalidate(); //refrescar
+        principal.repaint();
         
     }
 
