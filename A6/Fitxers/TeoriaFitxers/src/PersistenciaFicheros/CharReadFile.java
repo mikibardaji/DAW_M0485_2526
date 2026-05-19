@@ -20,7 +20,7 @@ public class CharReadFile {
 
     public CharReadFile(String rutaRelativaNom) throws FileNotFoundException {
         //preparar i obrir els fitxers
-        Archivo = new File(rutaRelativaNom);
+        Archivo = new File(rutaRelativaNom);  //ruta relativa carpeta i nom fitxer desde la carpeta projecte
         fr = new FileReader(Archivo);
     }
     

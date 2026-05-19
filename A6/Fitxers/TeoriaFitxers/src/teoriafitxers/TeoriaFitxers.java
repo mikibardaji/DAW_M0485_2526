@@ -6,6 +6,7 @@ package teoriafitxers;
 
 import PersistenciaFicheros.CharReadFile;
 import PersistenciaFicheros.CharWriteFile;
+import PersistenciaFicheros.LineReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,7 +28,10 @@ public class TeoriaFitxers {
         //pruebasObjetoFile();
         
         //leerFicheroCaracterACaracter();
-        escribirFicheroCaracterACaracter();
+        //escribirFicheroCaracterACaracter();
+        
+        lecturaFicheroLineaLinea();
+        
         
     }
 
@@ -156,6 +160,33 @@ public class TeoriaFitxers {
             System.err.println("Error de lectura " + ex.getMessage());
         }
         
+    }
+
+    private static void lecturaFicheroLineaLinea() {
+        LineReadFile lectura=null;
+        String linea;
+        try {
+            
+            //obrir el fitxer tipus fitxersLinea\\FicheroEntrada.txt
+            lectura = new LineReadFile("fitxersLinea\\\\FicheroEntrada.txt");
+            
+            do{
+                //legir Linea a linea
+                linea = lectura.readLineFromFile();
+                if (linea!=null)
+                {
+                    System.out.println(linea);
+                }
+            }while(linea!=null);
+            //mostrarla per consola
+            
+            //tancar fitxers
+            lectura.tancarFitxers();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TeoriaFitxers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TeoriaFitxers.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
