@@ -10,6 +10,7 @@ import PersistenciaFicheros.LineReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,8 +32,8 @@ public class TeoriaFitxers {
         //leerFicheroCaracterACaracter();
         //escribirFicheroCaracterACaracter();
         
-        lecturaFicheroLineaLinea();
-        
+        //lecturaFicheroLineaLinea();
+        escrituraFicheroLinea();
         
     }
 
@@ -197,6 +198,26 @@ public class TeoriaFitxers {
         } catch (IOException ex) {
              System.err.println("Error de lectura " + ex.getMessage());
         }
+    }
+
+    private static void escrituraFicheroLinea() {
+        List<String> lineasEscribir = new ArrayList<>();
+        lineasEscribir.add("fdfdfkskdj");
+        lineasEscribir.add("Jeremy");
+        lineasEscribir.add("Anass");
+        lineasEscribir.add("Goyo");
+        lineasEscribir.add("Sly");
+        lineasEscribir.add("Raul"); 
+        
+        //abrir fichero salida linea a linea
+        
+        
+        //escribir linea a linea en fichero de salida
+        
+        
+        //cerrar Fichero
+        
+        
     }
     
 }
