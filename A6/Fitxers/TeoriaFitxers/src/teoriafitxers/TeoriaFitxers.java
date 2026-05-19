@@ -169,7 +169,7 @@ public class TeoriaFitxers {
         try {
             
             //obrir el fitxer tipus fitxersLinea\\FicheroEntrada.txt
-            lectura = new LineReadFile("fitxersLinea\\\\FicheroEntrada.txt");
+            lectura = new LineReadFile("fitxersLinea\\FicheroEntrada.txt");
             
             //opcio 1
             do{
@@ -193,9 +193,9 @@ public class TeoriaFitxers {
             //tancar fitxers
             lectura.tancarFitxers();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TeoriaFitxers.class.getName()).log(Level.SEVERE, null, ex);
+             System.err.println("Error fichero no encontrado " + ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(TeoriaFitxers.class.getName()).log(Level.SEVERE, null, ex);
+             System.err.println("Error de lectura " + ex.getMessage());
         }
     }
     
