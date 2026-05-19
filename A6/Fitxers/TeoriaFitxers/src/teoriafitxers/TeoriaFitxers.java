@@ -10,6 +10,7 @@ import PersistenciaFicheros.LineReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -170,6 +171,7 @@ public class TeoriaFitxers {
             //obrir el fitxer tipus fitxersLinea\\FicheroEntrada.txt
             lectura = new LineReadFile("fitxersLinea\\\\FicheroEntrada.txt");
             
+            //opcio 1
             do{
                 //legir Linea a linea
                 linea = lectura.readLineFromFile();
@@ -178,6 +180,14 @@ public class TeoriaFitxers {
                     System.out.println(linea);
                 }
             }while(linea!=null);
+            
+            //opcio 2
+            List<String> todasLineas = lectura.readAllLinesFromFile();
+            
+            for (String lineaIndividual : todasLineas) {
+                System.out.println(lineaIndividual);
+            }
+            
             //mostrarla per consola
             
             //tancar fitxers
