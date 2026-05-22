@@ -1,0 +1,5 @@
+Que moneda hay en espanya?
+Dolar
+Lev
+Euro*
+Libra

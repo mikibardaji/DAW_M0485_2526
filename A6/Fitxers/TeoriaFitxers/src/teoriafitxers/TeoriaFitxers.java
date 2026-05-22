@@ -7,8 +7,10 @@ package teoriafitxers;
 import PersistenciaFicheros.CharReadFile;
 import PersistenciaFicheros.CharWriteFile;
 import PersistenciaFicheros.LineReadFile;
+import PersistenciaFicheros.LineWriteFile;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -201,21 +203,29 @@ public class TeoriaFitxers {
     }
 
     private static void escrituraFicheroLinea() {
-        List<String> lineasEscribir = new ArrayList<>();
-        lineasEscribir.add("fdfdfkskdj");
-        lineasEscribir.add("Jeremy");
-        lineasEscribir.add("Anass");
-        lineasEscribir.add("Goyo");
-        lineasEscribir.add("Sly");
-        lineasEscribir.add("Raul"); 
-        
-        //abrir fichero salida linea a linea
-        
-        
-        //escribir linea a linea en fichero de salida
-        
-        
-        //cerrar Fichero
+        LineWriteFile salida;
+        try {
+            List<String> lineasEscribir = new ArrayList<>();
+            lineasEscribir.add("fdfdfkskdj");
+            lineasEscribir.add("Jeremy");
+            lineasEscribir.add("Anass");
+            lineasEscribir.add("Goyo");
+            lineasEscribir.add("Sly");
+            lineasEscribir.add("Raul");
+            
+            //abrir fichero salida linea a linea
+            salida = new LineWriteFile("fitxersLinea\\salida.txt");
+            
+            //escribir linea a linea en fichero de salida
+            for (String linea : lineasEscribir) {
+                salida.writeLineToFile(linea);
+            }
+            System.out.println("he copiado las lineas... ");
+            //cerrar Fichero
+            salida.TancarFitxers();
+        } catch (IOException ex) {
+            System.err.println("Error de lectura " + ex.getMessage());
+        }
         
         
     }

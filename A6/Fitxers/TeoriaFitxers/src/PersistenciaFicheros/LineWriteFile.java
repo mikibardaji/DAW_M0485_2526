@@ -30,7 +30,8 @@ public class LineWriteFile {
         Archivo = new File(rutaRelativaArxiu);
         fw = new FileWriter(Archivo, end); //si end=true se añade al final sin borrar datos
         bw = new BufferedWriter(fw);
-    }    
+    } 
+    
     public void writeLineToFile (String lineaEscribir) throws IOException
     {
         if (lineaEscribir!=null)
